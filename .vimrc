@@ -24,6 +24,8 @@ set showcmd
 let g:airline#extensions#ale#enabled = 1
 
 autocmd BufWritePre,BufRead *.pro set filetype=prolog
+autocmd BufWritePre,BufRead *.service set filetype=systemd
+autocmd BufWritePre,BufRead *sudoers* set filetype=sudoers
 autocmd Filetype tex set tabstop=3 shiftwidth=3
 " Start NERDTree and put cursor in main window
 autocmd VimEnter * NERDTree | wincmd p
