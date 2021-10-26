@@ -185,6 +185,9 @@ bar {
 exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
 
+# Screen timeout and power saver
+exec --no-startup-id xset s 300
+exec --no-startup-id xset dpms 300 600 1200
 # Set background
 exec --no-startup-id feh --bg-scale /home/evanrh/Pictures/vog.jpg
 
@@ -195,3 +198,7 @@ for_window [class="^.*"] border pixel 2
 
 # Lock screen
 bindsym Control+Mod1+l exec --no-startup-id sudo systemctl start locki3.service
+
+# Brightness controls with brightnessctl
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
