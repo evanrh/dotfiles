@@ -1,0 +1,6 @@
+[bar/desktop]
+modules-right = date
+
+[module/date]
+type = internal/date
+date = %m-%d-%Y%
