@@ -4,19 +4,19 @@ env:
 font:
 
   normal:
-    family: monospace
+    family: DejaVu Sans Mono
     style: Regular
 
   bold:
-    family: monospace
+    family: DejaVu Sans Mono
     style: Bold
 
   italic:
-    family: monospace
+    family: DejaVu Sans Mono
     style: Italic
 
   bold_italic:
-    family: monospace
+    family: DejaVu Sans Mono
     style: Bold Italic
 
   size: 6.0
