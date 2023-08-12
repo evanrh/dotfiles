@@ -3,3 +3,5 @@
 [user]
 	name = Evan Hastings
 	email = 56352068+evanrh@users.noreply.github.com
+[core]
+	editor = /usr/bin/nvim
