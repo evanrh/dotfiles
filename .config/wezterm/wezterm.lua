@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm'
 
 local config = {}
+config.wsl_domains = wezterm.default_wsl_domains()
 
 if wezterm.config_builder then
   config = wezterm.config_builder()
@@ -12,14 +13,16 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.launch_menu = {
     {
       label = 'Powershell',
-      args = 'powershell.exe'
+      args = { 'powershell.exe' }
     },
     {
       label = 'Command Prompt',
-      args = 'cmd.exe'
+      args = { 'cmd.exe' }
     }
   }
 end
-config.color_scheme = 'Tokyo Night Storm'
 
+config.color_scheme = 'Tokyo Night Storm'
+config.enable_scroll_bar = true
+config.font_size = 10
 return config
