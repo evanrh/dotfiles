@@ -30,6 +30,11 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 
 end
 
+wezterm.on("gui-startup", function()
+	local tab, pane, window = mux.spawn_window{}
+	window:gui_window():maximize()
+end)
+
 config.color_scheme = 'Tokyo Night Storm'
 config.enable_scroll_bar = true
 config.font_size = 10
