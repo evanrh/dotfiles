@@ -39,6 +39,6 @@ end)
 
 config.color_scheme = 'Tokyo Night Storm'
 config.enable_scroll_bar = true
-config.font_size = 12
+config.font_size = 16
 config.native_macos_fullscreen_mode = true
 return config
