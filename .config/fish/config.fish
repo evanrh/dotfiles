@@ -2,6 +2,10 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+if test -d /opt/homebrew/bin
+    eval (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.profile
+end
+
 alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias vi="nvim"
 alias vim="nvim"

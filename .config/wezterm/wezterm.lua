@@ -32,11 +32,13 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 end
 
 wezterm.on("gui-startup", function()
-	local tab, pane, window = mux.spawn_window{}
-	window:gui_window():maximize()
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	local gui_window = window:gui_window()
+	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
 
 config.color_scheme = 'Tokyo Night Storm'
 config.enable_scroll_bar = true
-config.font_size = 10
+config.font_size = 12
+config.native_macos_fullscreen_mode = true
 return config
