@@ -1,0 +1,12 @@
+{
+    "editor.tabSize": 2,
+    "editor.indentSize": "tabSize",
+    "editor.insertSpaces": true,
+    "emmet.includeLanguages": {
+        "phoenix-heex": "html"
+    },
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "vim.useSystemClipboard": true,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true
+}
