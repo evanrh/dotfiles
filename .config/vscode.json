@@ -8,5 +8,6 @@
     "workbench.colorTheme": "Tokyo Night Storm",
     "vim.useSystemClipboard": true,
     "editor.fontFamily": "JetBrains Mono",
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "terminal.integrated.defaultProfile.osx": "fish"
 }

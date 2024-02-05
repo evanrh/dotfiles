@@ -1,0 +1,32 @@
+if OS.mac?
+	tap "homebrew/cask-fonts"
+	tap "koekeishiya/formulae"
+
+	brew "trash"
+
+	# Tiling WM - Yabai
+	brew "yabai"
+	brew "skhd"
+
+	# Mac specific applications
+	cask "scroll-reverser"
+
+	cask "font-jetbrains-mono"
+	cask "font-symbols-only-nerd-font"
+end
+
+brew "bat"
+brew "fnm"
+brew "git"
+brew "htop"
+brew "python"
+brew "tree"
+brew "r"
+
+brew "nmap"
+
+
+cask "wezterm"
+brew "fish"
+brew "neovim"
+brew "tmux"
