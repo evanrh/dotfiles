@@ -15,17 +15,26 @@ if OS.mac?
 	cask "font-symbols-only-nerd-font"
 end
 
-brew "bat"
-brew "fnm"
+tap "homebrew/bundle"
+
+# Tools
+brew "ripgrep"
+brew "fzf"
 brew "git"
-brew "htop"
-brew "python"
 brew "tree"
+brew "bat"
+brew "htop"
+brew "jq"
+brew "neofetch"
+
+# Languages and lang specific tooling
+brew "fnm"
+brew "python"
 brew "r"
 
 brew "nmap"
 
-
+# Terminal config
 cask "wezterm"
 brew "fish"
 brew "neovim"
