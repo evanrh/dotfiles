@@ -32,7 +32,9 @@ brew "fnm"
 brew "python"
 brew "r"
 
+# Misc software
 brew "nmap"
+brew "mpv"
 
 # Terminal config
 cask "wezterm"
