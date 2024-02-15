@@ -26,11 +26,12 @@ brew "bat"
 brew "htop"
 brew "jq"
 brew "neofetch"
+brew "lazygit"
+brew "eza"
 
 # Languages and lang specific tooling
 brew "fnm"
 brew "python"
-brew "r"
 
 # Misc software
 brew "nmap"

@@ -6,6 +6,10 @@ if test -d /opt/homebrew/bin
     eval (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.profile
 end
 
+if type -q "eza"
+	alias ls="eza"
+end
+
 if type -q "fnm"
 	fnm env | source
 end
