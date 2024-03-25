@@ -20,6 +20,9 @@ vim.opt.smartindent = true
 -- vim.opt.relativenumber = true
 vim.opt.clipboard:append("unnamedplus")
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 require("lazy").setup {
 	{ import = "plugins" },
 }
