@@ -31,6 +31,30 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 
 end
 
+config.leader = { key = "Space", mods = "CTRL" }
+config.keys = {
+  {
+    key = "|",
+    mods = "LEADER|SHIFT",
+    action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" }
+  },
+  {
+    key = "LeftArrow",
+    mods = "CTRL|SHIFT",
+    action = wezterm.action.ActivateTabRelative(-1)
+  },
+  {
+    key = "RightArrow",
+    mods = "CTRL|SHIFT",
+    action = wezterm.action.ActivateTabRelative(1)
+  },
+  {
+    key = "Enter",
+    mods = "CTRL|SHIFT",
+    action = wezterm.action.SpawnTab "DefaultDomain"
+  }
+}
+
 wezterm.on("gui-startup", function()
 	local tab, pane, window = mux.spawn_window(cmd or {})
 	local gui_window = window:gui_window()
