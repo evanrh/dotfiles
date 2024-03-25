@@ -10,5 +10,6 @@
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontSize": 16,
     "editor.fontLigatures": true,
-    "terminal.integrated.defaultProfile.osx": "fish"
+    "terminal.integrated.defaultProfile.osx": "fish",
+    "editor.stickyScroll.enabled": false,
 }

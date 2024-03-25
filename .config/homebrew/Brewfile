@@ -2,6 +2,9 @@ if OS.mac?
 	tap "homebrew/cask-fonts"
 	tap "koekeishiya/formulae"
 
+	tap "heroku/brew"
+	brew "heroku"
+
 	brew "trash"
 
 	# Tiling WM - Yabai
@@ -13,6 +16,7 @@ if OS.mac?
 
 	cask "font-jetbrains-mono"
 	cask "font-symbols-only-nerd-font"
+	cask "bitwarden"
 end
 
 tap "homebrew/bundle"
@@ -20,6 +24,7 @@ tap "homebrew/bundle"
 # Tools
 brew "ripgrep"
 brew "fzf"
+brew "fd"
 brew "git"
 brew "tree"
 brew "bat"

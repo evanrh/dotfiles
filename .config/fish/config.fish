@@ -18,5 +18,13 @@ alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias vi="nvim"
 alias vim="nvim"
 
+# DNS Flushing section
+switch (uname)
+	case Linux
+		alias flushdns="sudo resolvectl flush-caches"
+	case Darwin
+		alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+end
+
 export DENO_INSTALL="/home/evanrh/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
