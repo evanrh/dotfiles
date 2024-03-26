@@ -14,6 +14,10 @@ if type -q "fnm"
   fnm env | source
 end
 
+if type -q "bat"
+  alias cat="bat"
+end
+
 # Common aliases for command subs that I use
 alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias vi="nvim"

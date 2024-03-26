@@ -21,8 +21,7 @@ vim.opt.expandtab = true
 -- vim.opt.relativenumber = true
 vim.opt.clipboard:append("unnamedplus")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+require("keymaps").setup()
 
 require("lazy").setup {
 	{ import = "plugins" },
