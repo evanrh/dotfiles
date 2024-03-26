@@ -1,6 +1,7 @@
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities();
 local M = {}
 
 -- Keymaps for LSP
@@ -44,25 +45,48 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Base setup of mason and LSP handlers
 function M.setup()
-	mason.setup()
-	mason_lspconfig.setup {
-		ensure_installed = { "lua_ls", "tsserver", "cssls", "dockerls", "eslint", "jsonls", "tailwindcss", "svelte", },
-		automatic_installation = true,
-		ui = { check_outdated_servers_on_open = true },
-	}
+  mason.setup()
+  mason_lspconfig.setup {
+    ensure_installed = { "lua_ls", "tsserver", "cssls", "dockerls", "eslint", "jsonls", "tailwindcss", "svelte", },
+    automatic_installation = true,
+    ui = { check_outdated_servers_on_open = true },
+  }
 
-	mason_lspconfig.setup_handlers {
-		eslint = function()
-			lspconfig.eslint.setup {
-				root_dir = lspconfig.util.root_pattern(
-					"eslint.config.js",
-					".eslintrc.js",
-					".eslintrc.json",
-					".eslintrc"
-				),
-			}
-		end
-	}
+  mason_lspconfig.setup_handlers {
+    eslint = function()
+      lspconfig.eslint.setup {
+        root_dir = lspconfig.util.root_pattern(
+        "eslint.config.js",
+        ".eslintrc.js",
+        ".eslintrc.json",
+        ".eslintrc"
+        ),
+      }
+    end,
+
+    lua_ls = function()
+      lspconfig.lua_ls.setup {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" }
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            }
+          }
+        }
+      }
+    end,
+
+    tsserver = function()
+      lspconfig.tsserver.setup {
+        capabilities = capabilities
+      }
+    end
+  }
 end
 
 return M
