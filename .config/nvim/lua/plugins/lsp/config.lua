@@ -1,3 +1,6 @@
+-- NOTE: Helpful article on configuring LSP and completions
+-- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
@@ -16,30 +19,27 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
+    local bufmap = function(mode, lhs, rhs, desc)
+      local opts = { buffer = ev.buf, desc = desc }
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Buffer local mappings
     -- see `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end,opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
-
+    bufmap("n", "K", vim.lsp.buf.hover, "Show hover")
+    bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
+    bufmap("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+    bufmap("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
+    bufmap("n", "go", vim.lsp.buf.type_definition, "Go to type definition")
+    bufmap("n", "gr", vim.lsp.buf.references, "List all references")
+    bufmap("n", "gs", vim.lsp.buf.signature_help, "Display signature info")
+    bufmap("n", "<F2>", vim.lsp.buf.rename, "Rename all references")
+    bufmap("n", "<F4>", vim.lsp.buf.code_action, "Select a code action")
+    bufmap("n", "gl", vim.diagnostic.open_float, "Show diagnostics")
+    bufmap("n", "[d", vim.diagnostic.goto_prev, "Goto previous diagnostic")
+    bufmap("n", "]d", vim.diagnostic.goto_next, "Goto next diagnostic")
   end,
 })
 

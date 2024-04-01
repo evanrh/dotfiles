@@ -18,7 +18,11 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
 vim.opt.expandtab = true
--- vim.opt.relativenumber = true
+vim.opt.termguicolors = true
+
+-- Options for completions
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 vim.opt.clipboard:append("unnamedplus")
 
 require("keymaps").setup()
