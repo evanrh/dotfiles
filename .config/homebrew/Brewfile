@@ -33,6 +33,7 @@ brew "jq"
 brew "neofetch"
 brew "lazygit"
 brew "eza"
+brew "zoxide"
 
 # Languages and lang specific tooling
 brew "fnm"

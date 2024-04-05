@@ -19,6 +19,8 @@ vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- Options for completions
 vim.opt.completeopt = { "menu", "menuone", "noselect" }

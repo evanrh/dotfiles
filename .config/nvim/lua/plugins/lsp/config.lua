@@ -83,7 +83,12 @@ function M.setup()
 
     tsserver = function()
       lspconfig.tsserver.setup {
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+          implicitProjectConfiguration = {
+            checkJs = false
+          },
+        }
       }
     end
   }

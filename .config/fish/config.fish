@@ -20,6 +20,7 @@ end
 
 # Common aliases for command subs that I use
 alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias lazyconfig="lazygit --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias vi="nvim"
 alias vim="nvim"
 
@@ -33,3 +34,8 @@ end
 
 export DENO_INSTALL="/home/evanrh/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+if type -q "zoxide"
+  zoxide init fish | source
+  alias cd="z"
+end
