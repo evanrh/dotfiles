@@ -21,14 +21,18 @@ vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Options for completions
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.clipboard:append("unnamedplus")
 
-require("keymaps").setup()
-
 require("lazy").setup {
 	{ import = "plugins" },
 }
+
+require("keymaps").setup()

@@ -1,6 +1,6 @@
 -- NOTE: Great article on configuring DAP
 -- https://miguelcrespo.co/posts/how-to-debug-like-a-pro-using-neovim
---
+
 local result = {}
 local telescope = require("telescope")
 
@@ -52,14 +52,6 @@ function result.setup()
   local javascriptLangs = { "javascript", "typescript" }
 
   require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = javascriptLangs })
-
-  vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-  vim.keymap.set("n", "<leader>dr", dap.continue, { desc = "Start / Continue debugger" })
-  vim.keymap.set("n", "<leader>dB", telescope.extensions.dap.list_breakpoints, { desc = "List breakpoints" })
-  vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step into" })
-  vim.keymap.set("n", "<leader>dI", dap.step_out, { desc = "Step out" })
-  vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
-
 end
 
 return result
