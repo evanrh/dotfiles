@@ -11,7 +11,9 @@ return {
       dependencies = {
         "rafamadriz/friendly-snippets"
       }
-    }
+    },
+    "rcarriga/cmp-dap",
+    "onsails/lspkind.nvim",
   },
   config = function()
     require("plugins.completions.config").setup()

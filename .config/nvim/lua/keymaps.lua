@@ -43,6 +43,13 @@ function result.setup()
       i = { dap.step_into, "Step into" },
       I = { dap.step_out, "Step out" },
       o = { dap.step_over, "Step over" },
+      q = { dap.terminate, "Quit session" },
+      c = { function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "Set conditional breakpoint" },
+    },
+    t = {
+      name = "+terminal",
+      o = { ":FloatermNew<CR>", "Open floating terminal" },
+      t = { ":FloatermToggle<CR>", "Toggle floating terminal" },
     }
   }, { prefix = "<leader>" })
 end

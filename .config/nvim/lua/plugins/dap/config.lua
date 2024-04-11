@@ -9,6 +9,8 @@ function result.setup()
   local dap = require("dap")
   local dapui = require("dapui")
 
+  dap.defaults.fallback.exception_breakpoints = { "uncaught" }
+
   -- Setup DAP UI to run when DAP plugin loads
   dap.listeners.before.attach.dapui_config = dapui.open
   dap.listeners.before.launch.dapui_config = dapui.open
@@ -24,7 +26,36 @@ function result.setup()
   require("nvim-dap-virtual-text").setup()
   telescope.load_extension("dap")
 
-  dapui.setup()
+  dapui.setup({
+    layouts = { {
+      elements = { {
+        id = "repl",
+        size = 1
+      } },
+      position = "bottom",
+      size = 10
+    }, {
+      elements = { {
+        id = "scopes",
+        size = 0.5
+      }, {
+        id = "breakpoints",
+        size = 0.5
+      } },
+      position = "left",
+      size = 30
+    },  {
+      elements = { {
+        id = "console",
+        size = 0.5
+      }, {
+        id = "watches",
+        size = 0.5
+      } },
+      position = "right",
+      size = 30
+    } }
+  })
 
   -- Setup proper signs for DAP
   vim.fn.sign_define("DapBreakpoint", { text="🛑", texthl="", linehl="", numhl="" })
