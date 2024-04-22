@@ -4,7 +4,9 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-    "onsails/lspkind.nvim"
+    "onsails/lspkind.nvim",
+    "kosayoda/nvim-lightbulb",
+    "aznhe21/actions-preview.nvim",
 	},
 	config = function()
 		require("plugins.lsp.config").setup()

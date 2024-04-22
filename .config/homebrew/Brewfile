@@ -46,5 +46,5 @@ brew "mpv"
 # Terminal config
 cask "wezterm"
 brew "fish"
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 brew "tmux"

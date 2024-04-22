@@ -18,7 +18,8 @@ function result.setup()
       j = { function() vim.cmd(":wincmd j") end, "Move down" },
       k = { function() vim.cmd(":wincmd k") end, "Move up" },
       l = { function() vim.cmd(":wincmd l") end, "Move left" },
-      q = { function() vim.cmd(":quit") end, "Quit"}
+      w = { function() vim.cmd(":wincmd w") end, "Move forward" },
+      q = { function() vim.cmd(":quit") end, "Quit" }
     },
     b = {
       name = "+buffer",

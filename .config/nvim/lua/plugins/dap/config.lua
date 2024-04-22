@@ -61,7 +61,9 @@ function result.setup()
   vim.fn.sign_define("DapBreakpoint", { text="🛑", texthl="", linehl="", numhl="" })
   vim.fn.sign_define("DapStopped", { text="▶️", texthl="", linehl="", numhl="" })
 
-  for _, language in ipairs({ "typescript", "javascript"}) do
+  local javascriptLangs = { "javascript", "typescript" }
+
+  for _, language in ipairs(javascriptLangs) do
     dap.configurations[language] = {
       {
         type = "pwa-node",
@@ -76,11 +78,9 @@ function result.setup()
         name = "Attach",
         processId = require("dap.utils").pick_process,
         cwd = "${workspaceFolder}",
-      }
+      },
     }
   end
-
-  local javascriptLangs = { "javascript", "typescript" }
 
   require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = javascriptLangs })
 end

@@ -5,8 +5,20 @@ local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities();
+local actions_preview = require("actions-preview")
 local M = {}
 
+local signs = {
+  Error = "⛔",
+  Warn = "⚠️",
+  Hint = "✏️",
+  Info = "ℹ️",
+}
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 -- Keymaps for LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -19,6 +31,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufmap = function(mode, lhs, rhs, desc)
       local opts = { buffer = ev.buf, desc = desc }
       vim.keymap.set(mode, lhs, rhs, opts)
@@ -26,6 +39,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+    if client ~= nil and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true)
+    end
     -- Buffer local mappings
     -- see `:help vim.lsp.*` for documentation on any of the below functions
     bufmap("n", "K", vim.lsp.buf.hover, "Show hover")
@@ -40,11 +56,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap("n", "gl", vim.diagnostic.open_float, "Show diagnostics")
     bufmap("n", "[d", vim.diagnostic.goto_prev, "Goto previous diagnostic")
     bufmap("n", "]d", vim.diagnostic.goto_next, "Goto next diagnostic")
+    bufmap("n", "ga", actions_preview.code_actions, "View code actions")
   end,
 })
 
 -- Base setup of mason and LSP handlers
 function M.setup()
+
+  require("nvim-lightbulb").setup({
+    -- NOTE: Items pulled from LSP spec: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeActionKind
+    action_kinds = { "quickfix", "refactor.inline", "refactor.rewrite", "source.organizeImports", "source.fixAll" },
+    autocmd = {
+      enabled = true
+    },
+    virtual_text = {
+      enabled = true,
+    },
+    sign = {
+      enabled = false,
+    },
+    ignore = {
+      actions_without_kind = true,
+    }
+  })
+
   require('lspkind').init({
     mode = 'symbol_text',
     preset = 'default',
@@ -118,6 +153,22 @@ function M.setup()
         settings = {
           implicitProjectConfiguration = {
             checkJs = false
+          },
+          typescript = {
+            inlayHints = {
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includePropertyDeclarationTypeHints = true,
+            }
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includePropertyDeclarationTypeHints = true,
+            }
           },
         }
       }
