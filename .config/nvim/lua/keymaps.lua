@@ -32,9 +32,11 @@ function result.setup()
       name = "+fuzzy find",
       f = { builtin.find_files, "Find files" },
       g = { builtin.live_grep, "Live grep current working dir" },
+      G = { function () builtin.live_grep({ grep_open_files = true }) end, "Live grep open buffers" },
       b = { builtin.buffers, "Search active buffers" },
       h = { builtin.help_tags, "Search vim help" },
       m = { builtin.man_pages, "Search man pages" },
+      e = { telescope.extensions.nerdy.nerdy, "Search Nerd Font Symbols" },
     },
     d = {
       name = "+debugger",
@@ -49,9 +51,14 @@ function result.setup()
     },
     t = {
       name = "+terminal",
-      o = { ":FloatermNew<CR>", "Open floating terminal" },
-      t = { ":FloatermToggle<CR>", "Toggle floating terminal" },
-    }
+      o = { function() vim.cmd(":FloatermNew") end, "Open floating terminal" },
+      t = { function() vim.cmd(":FloatermToggle") end, "Toggle floating terminal" },
+    },
+    o = {
+      name = "+open",
+      t = { function() vim.cmd(":FloatermNew") end, "Open floating terminal" },
+      T = { function() vim.cmd(":Neotree toggle") end, "Toggle file tree to the left" },
+    },
   }, { prefix = "<leader>" })
 end
 

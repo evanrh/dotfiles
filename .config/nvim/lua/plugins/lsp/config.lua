@@ -1,5 +1,6 @@
--- NOTE: Helpful article on configuring LSP and completions
+-- NOTE: Helpful articles on configuring LSP, completions, and diagnostics
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+-- https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/
 
 local lspconfig = require("lspconfig")
 local mason = require("mason")
@@ -9,10 +10,10 @@ local actions_preview = require("actions-preview")
 local M = {}
 
 local signs = {
-  Error = "⛔",
-  Warn = "⚠️",
+  Error = "",
+  Warn = "",
   Hint = "✏️",
-  Info = "ℹ️",
+  Info = "",
 }
 
 for type, icon in pairs(signs) do
@@ -113,7 +114,17 @@ function M.setup()
   })
   mason.setup()
   mason_lspconfig.setup {
-    ensure_installed = { "lua_ls", "tsserver", "cssls", "dockerls", "eslint", "jsonls", "tailwindcss", "svelte", },
+    ensure_installed = {
+      "lua_ls",
+      "tsserver",
+      "cssls",
+      "dockerls",
+      "eslint",
+      "jsonls",
+      "tailwindcss",
+      "svelte",
+      "angularls",
+    },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
   }
@@ -172,6 +183,16 @@ function M.setup()
           },
         }
       }
+    end,
+
+    angularls = function()
+      lspconfig.angularls.setup({})
+    end,
+
+    cssls = function()
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+      })
     end
   }
 end

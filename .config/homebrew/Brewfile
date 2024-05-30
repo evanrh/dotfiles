@@ -2,8 +2,10 @@ if OS.mac?
 	tap "homebrew/cask-fonts"
 	tap "koekeishiya/formulae"
 
+  # Work software
 	tap "heroku/brew"
 	brew "heroku"
+  brew "firebase-cli"
 
 	brew "trash"
 
@@ -26,6 +28,7 @@ brew "ripgrep"
 brew "fzf"
 brew "fd"
 brew "git"
+brew "git-filter-repo"
 brew "tree"
 brew "bat"
 brew "htop"
