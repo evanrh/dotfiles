@@ -19,6 +19,7 @@ if OS.mac?
 	cask "font-jetbrains-mono"
 	cask "font-symbols-only-nerd-font"
 	cask "bitwarden"
+  cask "sleek"
 end
 
 tap "homebrew/bundle"
@@ -37,6 +38,8 @@ brew "neofetch"
 brew "lazygit"
 brew "eza"
 brew "zoxide"
+cask "nextcloud"
+brew "watch"
 
 # Languages and lang specific tooling
 brew "fnm"

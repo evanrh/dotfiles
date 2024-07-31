@@ -24,6 +24,7 @@ alias lazyconfig="lazygit --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias vi="nvim"
 alias vim="nvim"
 alias clearteams="rm -rf $HOME/Library/Group Containers/UBF8T346G9.com.microsoft.teams && rm -rf $HOME/Library/Containers/com.microsoft.teams2/Data"
+alias lg="lazygit"
 
 # DNS Flushing section
 switch (uname)
@@ -31,6 +32,7 @@ switch (uname)
     alias flushdns="sudo resolvectl flush-caches"
   case Darwin
     alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+    alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 end
 
 export DENO_INSTALL="/home/evanrh/.deno"

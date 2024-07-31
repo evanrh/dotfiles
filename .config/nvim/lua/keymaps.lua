@@ -58,6 +58,7 @@ function result.setup()
       name = "+open",
       t = { function() vim.cmd(":FloatermNew") end, "Open floating terminal" },
       T = { function() vim.cmd(":Neotree toggle") end, "Toggle file tree to the left" },
+      b = { telescope.extensions.file_browser.file_browser, "Open file browser"}
     },
   }, { prefix = "<leader>" })
 end

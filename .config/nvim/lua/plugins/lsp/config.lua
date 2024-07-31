@@ -159,6 +159,13 @@ function M.setup()
     end,
 
     tsserver = function()
+      local inlayHints = {
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includePropertyDeclarationTypeHints = true,
+      }
+
       lspconfig.tsserver.setup {
         capabilities = capabilities,
         settings = {
@@ -166,20 +173,10 @@ function M.setup()
             checkJs = false
           },
           typescript = {
-            inlayHints = {
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includePropertyDeclarationTypeHints = true,
-            }
+            inlayHints,
           },
           javascript = {
-            inlayHints = {
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includePropertyDeclarationTypeHints = true,
-            }
+            inlayHints,
           },
         }
       }
@@ -192,6 +189,23 @@ function M.setup()
     cssls = function()
       lspconfig.cssls.setup({
         capabilities = capabilities,
+      })
+    end,
+
+    tailwindcss = function()
+      lspconfig.tailwindcss.setup({
+        capabilities = capabilities
+      })
+    end,
+
+    jsonls = function()
+      lspconfig.jsonls.setup({
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          }
+        }
       })
     end
   }
