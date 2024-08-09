@@ -10,13 +10,6 @@ local actions_preview = require("actions-preview")
 local utils = require("utils");
 local M = {}
 
-local signs = {
-  Error = "",
-  Warn = "",
-  Hint = "✏️",
-  Info = "",
-}
-
 local goto_diagnostic = function(diagnostic_func)
   local diagnostics = vim.diagnostic.count(0)
   local count = utils.count_indices(diagnostics)
@@ -41,10 +34,32 @@ local goto_next = function()
   goto_diagnostic(vim.diagnostic.get_next)
 end
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+local signs = {
+  {"Error", vim.diagnostic.severity.ERROR, "" },
+  {"Warn", vim.diagnostic.severity.WARN, "" },
+  {"Hint", vim.diagnostic.severity.HINT, "✏️" },
+  {"Info", vim.diagnostic.severity.INFO, "" },
+}
+
+local signsConfig = {
+  text = {},
+  linehl = {},
+  texthl = {},
+  numhl = {},
+}
+
+for _, mapping in pairs(signs) do
+  local hl = "DiagnosticSign" .. mapping[1]
+  local severity = mapping[2]
+  signsConfig.text[severity] = mapping[3]
+  signsConfig.linehl[severity] = hl
+  signsConfig.numhl[severity] = hl
 end
+
+vim.diagnostic.config({
+  signs = signsConfig
+})
+
 -- Keymaps for LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
