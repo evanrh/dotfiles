@@ -5,7 +5,6 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
     "onsails/lspkind.nvim",
-    "kosayoda/nvim-lightbulb",
     "aznhe21/actions-preview.nvim",
     "b0o/SchemaStore.nvim",
 	},

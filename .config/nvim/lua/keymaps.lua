@@ -5,62 +5,63 @@ local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 local dap = require("dap")
 
+local function winsplit(direction)
+  return function() vim.cmd.wincmd(direction) end
+end
+
 function result.setup()
 
   vim.keymap.set("n", "<Esc>", function() vim.opt.hlsearch = not vim.opt.hlsearch:get() end)
 
-  wk.register({
-    w = {
-      name = "+window",
-      ["|"] = { function() vim.cmd(":vsplit") end, "Split window vertically" },
-      ["-"] = { function() vim.cmd(":split") end, "Split window horizontally" },
-      h = { function() vim.cmd(":wincmd h") end, "Move right" },
-      j = { function() vim.cmd(":wincmd j") end, "Move down" },
-      k = { function() vim.cmd(":wincmd k") end, "Move up" },
-      l = { function() vim.cmd(":wincmd l") end, "Move left" },
-      w = { function() vim.cmd(":wincmd w") end, "Move forward" },
-      q = { function() vim.cmd(":quit") end, "Quit" }
-    },
-    b = {
-      name = "+buffer",
-      d = { bufdelete.bufdelete, "Delete buffer" },
-      w = { bufdelete.bufwipeout, "Wipe out buffer" },
-      ["["] = { function() vim.cmd(":bprevious") end, "Goto previous buffer" },
-      ["]"] = { function() vim.cmd(":bprevious") end, "Goto previous buffer" },
-    },
-    f = {
-      name = "+fuzzy find",
-      f = { builtin.find_files, "Find files" },
-      g = { builtin.live_grep, "Live grep current working dir" },
-      G = { function () builtin.live_grep({ grep_open_files = true }) end, "Live grep open buffers" },
-      b = { builtin.buffers, "Search active buffers" },
-      h = { builtin.help_tags, "Search vim help" },
-      m = { builtin.man_pages, "Search man pages" },
-      e = { telescope.extensions.nerdy.nerdy, "Search Nerd Font Symbols" },
-    },
-    d = {
-      name = "+debugger",
-      b = { dap.toggle_breakpoint, "Toggle breakpoint" },
-      r = { dap.continue, "Start / Continue debugger" },
-      B = { telescope.extensions.dap.list_breakpoints, "List breakpoints" },
-      i = { dap.step_into, "Step into" },
-      I = { dap.step_out, "Step out" },
-      o = { dap.step_over, "Step over" },
-      q = { dap.terminate, "Quit session" },
-      c = { function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, "Set conditional breakpoint" },
-    },
-    t = {
-      name = "+terminal",
-      o = { function() vim.cmd(":FloatermNew") end, "Open floating terminal" },
-      t = { function() vim.cmd(":FloatermToggle") end, "Toggle floating terminal" },
-    },
-    o = {
-      name = "+open",
-      t = { function() vim.cmd(":FloatermNew") end, "Open floating terminal" },
-      T = { function() vim.cmd(":Neotree toggle") end, "Toggle file tree to the left" },
-      b = { telescope.extensions.file_browser.file_browser, "Open file browser"}
-    },
-  }, { prefix = "<leader>" })
+  wk.add({
+    { "<leader>w", group = "window" },
+    { "<leader>w|", vim.cmd.vsplit, desc = "Split window vertically" },
+    { "<leader>w-", vim.cmd.split , desc = "Split window horizontally" },
+    { "<leader>wh", winsplit("h"), desc = "Move right" },
+    { "<leader>wj", winsplit("j"), desc = "Move down" },
+    { "<leader>wk", winsplit("k"), desc = "Move up" },
+    { "<leader>wl", winsplit("l"), desc = "Move right" },
+    { "<leader>ww", winsplit("w"), desc = "Move forward" },
+    { "<leader>wq", vim.cmd.quit, desc = "Quit" },
+
+    { "<leader>b", group = "buffer" },
+    { "<leader>bd", bufdelete.bufdelete, desc = "Delete buffer" },
+    { "<leader>bw", bufdelete.bufwipeout, desc = "Wipe out buffer" },
+    { "<leader>b[", vim.cmd.bprevious, desc = "Goto previous buffer" },
+    { "<leader>b]", vim.cmd.bnext, desc = "Goto next buffer" },
+
+    { "<leader>f", group = "fuzzy find" },
+    { "<leader>ff", builtin.find_files, desc = "Find files" },
+    { "<leader>fg", builtin.live_grep, desc = "Live grep current working dir" },
+    { "<leader>fG", function() builtin.live_grep.live_grep({ grep_open_files = true }) end, desc = "Live grep current working dir" },
+    { "<leader>fb", builtin.buffers, desc = "Search active buffers" },
+    { "<leader>fh", builtin.help_tags, desc = "Search vim help" },
+    { "<leader>fm", builtin.man_pages, desc = "Search man pages" },
+    { "<leader>fe", telescope.extensions.nerdy.nerdy, desc = "Search Nerd Font symbols" },
+
+    { "<leader>d", group = "debugger" },
+    { "<leader>db", dap.toggle_breakpoint, desc = "Toggle breakpoint" },
+    { "<leader>dr", dap.continue, desc = "Start / Continue debugger" },
+    { "<leader>dB", telescope.extensions.dap.list_breakpoints, desc = "List breakpoints" },
+    { "<leader>di", dap.step_into, desc = "Step into" },
+    { "<leader>dI", dap.step_out, desc = "Step out" },
+    { "<leader>do", dap.step_over, desc = "Step over" },
+    { "<leader>dq", dap.terminate, desc = "Quit session" },
+    { "<leader>dc", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Set conditional breakpoint" },
+
+    { "<leader>t", group = "tabs" },
+    { "<leader>to", vim.cmd.tabnew, desc = "Open new tab" },
+    { "<leader>t[", vim.cmd.tabprevious, desc = "Goto previous tab" },
+    { "<leader>t]", vim.cmd.tabnext, desc = "Goto next tab" },
+    { "<leader>tt", vim.cmd.tabnext, desc = "Goto next tab" },
+    { "<leader>tq", vim.cmd.tabclose, desc = "Close tab" },
+
+    { "<leader>o", group = "open" },
+    { "<leader>ot", "<cmd>FloatermNew<cr>", desc = "Open floating terminal" },
+    { "<leader>oT", "<cmd>Neotree toggle<cr>", desc = "Toggle file tree to the left" },
+    { "<leader>ob", telescope.extensions.file_browser.file_browser, desc = "Open file browser" },
+  })
+
 end
 
 return result

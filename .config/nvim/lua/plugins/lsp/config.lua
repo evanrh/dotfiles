@@ -7,6 +7,7 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities();
 local actions_preview = require("actions-preview")
+local utils = require("utils");
 local M = {}
 
 local signs = {
@@ -16,6 +17,30 @@ local signs = {
   Info = "",
 }
 
+local goto_diagnostic = function(diagnostic_func)
+  local diagnostics = vim.diagnostic.count(0)
+  local count = utils.count_indices(diagnostics)
+
+  if count == 0 then
+    vim.print("'No diagnostics for current buffer'")
+    return
+  end
+
+  vim.diagnostic.jump({
+    diagnostic = diagnostic_func(),
+    wrap = true,
+    float = true,
+  })
+end
+
+local goto_prev = function()
+  goto_diagnostic(vim.diagnostic.get_prev)
+end
+
+local goto_next = function()
+  goto_diagnostic(vim.diagnostic.get_next)
+end
+
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -23,8 +48,8 @@ end
 -- Keymaps for LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', goto_prev)
+vim.keymap.set('n', ']d', goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
@@ -55,31 +80,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap("n", "<F2>", vim.lsp.buf.rename, "Rename all references")
     bufmap("n", "<F4>", vim.lsp.buf.code_action, "Select a code action")
     bufmap("n", "gl", vim.diagnostic.open_float, "Show diagnostics")
-    bufmap("n", "[d", vim.diagnostic.goto_prev, "Goto previous diagnostic")
-    bufmap("n", "]d", vim.diagnostic.goto_next, "Goto next diagnostic")
+    bufmap("n", "[d", goto_prev, "Goto previous diagnostic")
+    bufmap("n", "]d", goto_next, "Goto next diagnostic")
     bufmap("n", "ga", actions_preview.code_actions, "View code actions")
   end,
 })
 
 -- Base setup of mason and LSP handlers
 function M.setup()
-
-  require("nvim-lightbulb").setup({
-    -- NOTE: Items pulled from LSP spec: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#codeActionKind
-    action_kinds = { "quickfix", "refactor.inline", "refactor.rewrite", "source.organizeImports", "source.fixAll" },
-    autocmd = {
-      enabled = true
-    },
-    virtual_text = {
-      enabled = true,
-    },
-    sign = {
-      enabled = false,
-    },
-    ignore = {
-      actions_without_kind = true,
-    }
-  })
 
   require('lspkind').init({
     mode = 'symbol_text',
