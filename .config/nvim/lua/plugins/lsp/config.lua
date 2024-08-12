@@ -52,7 +52,6 @@ for _, mapping in pairs(signs) do
   local hl = "DiagnosticSign" .. mapping[1]
   local severity = mapping[2]
   signsConfig.text[severity] = mapping[3]
-  signsConfig.linehl[severity] = hl
   signsConfig.numhl[severity] = hl
 end
 

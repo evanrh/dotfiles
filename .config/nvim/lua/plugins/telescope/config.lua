@@ -1,8 +1,15 @@
 local result = {}
-local builtin = require("telescope.builtin")
+local telescope = require("telescope");
 
 function result.setup()
-  require("telescope").load_extension("file_browser")
+  local extensions = {
+    "file_browser",
+    "ui-select",
+  }
+
+  for _, v in pairs(extensions) do
+    telescope.load_extension(v)
+  end
 end
 
 return result

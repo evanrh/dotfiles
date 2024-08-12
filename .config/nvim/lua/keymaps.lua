@@ -38,6 +38,7 @@ function result.setup()
     { "<leader>fh", builtin.help_tags, desc = "Search vim help" },
     { "<leader>fm", builtin.man_pages, desc = "Search man pages" },
     { "<leader>fe", telescope.extensions.nerdy.nerdy, desc = "Search Nerd Font symbols" },
+    { "<leader>fa", function() vim.lsp.buf.code_action() end, desc = "Search code actions" },
 
     { "<leader>d", group = "debugger" },
     { "<leader>db", dap.toggle_breakpoint, desc = "Toggle breakpoint" },
