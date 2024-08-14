@@ -61,6 +61,7 @@ function result.setup()
     { "<leader>ot", "<cmd>FloatermNew<cr>", desc = "Open floating terminal" },
     { "<leader>oT", "<cmd>Neotree toggle<cr>", desc = "Toggle file tree to the left" },
     { "<leader>ob", telescope.extensions.file_browser.file_browser, desc = "Open file browser" },
+    { "<leader>ou", vim.cmd.UndotreeToggle, desc = "Open undotree" },
   })
 
 end
