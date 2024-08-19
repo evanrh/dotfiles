@@ -7,7 +7,6 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup{
       ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "svelte", "json", "tsx" },
-      autotag = { enable = true },
       sync_install = false,
       auto_install = true,
       ignore_install = {},
@@ -24,6 +23,14 @@ return {
         end
       }
     }
+
+    require("nvim-ts-autotag").setup({
+      opts = {
+        enable_close = true,
+        enable_rename = true,
+        enable_close_on_slash = true
+      },
+    })
 
     vim.o.foldmethod = "expr"
     vim.o.foldexpr = "nvim_treesitter#foldexpr()"

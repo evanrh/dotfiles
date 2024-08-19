@@ -4,6 +4,7 @@ local bufdelete = require("bufdelete")
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
 local dap = require("dap")
+local conform = require("conform")
 
 local function winsplit(direction)
   return function() vim.cmd.wincmd(direction) end
@@ -40,6 +41,12 @@ function result.setup()
     { "<leader>fe", telescope.extensions.nerdy.nerdy, desc = "Search Nerd Font symbols" },
     { "<leader>fa", function() vim.lsp.buf.code_action() end, desc = "Search code actions" },
 
+    { "<leader>l", group = "LSP" },
+    { "<leader>lc", function() vim.lsp.buf.code_action() end, desc = "Search code actions" },
+    { "<leader>ln", function() vim.lsp.buf.rename() end, desc = "Rename symbol at cursor" },
+    { "<leader>lr", function() vim.lsp.buf.references() end, desc = "List references to symbol" },
+
+
     { "<leader>d", group = "debugger" },
     { "<leader>db", dap.toggle_breakpoint, desc = "Toggle breakpoint" },
     { "<leader>dr", dap.continue, desc = "Start / Continue debugger" },
@@ -62,6 +69,9 @@ function result.setup()
     { "<leader>oT", "<cmd>Neotree toggle<cr>", desc = "Toggle file tree to the left" },
     { "<leader>ob", telescope.extensions.file_browser.file_browser, desc = "Open file browser" },
     { "<leader>ou", vim.cmd.UndotreeToggle, desc = "Open undotree" },
+
+    { "<leader>v", group = "vim" },
+    { "<leader>vf", function() conform.format({ bufnr = 0 }) end, desc = "Format current buffer" },
   })
 
 end

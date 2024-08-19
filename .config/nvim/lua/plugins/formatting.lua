@@ -3,11 +3,14 @@ return {
     "stevearc/conform.nvim",
     config = function()
       local conform = require("conform")
+      local jsFormatOptions = function()
+        return { "prettierd", "prettier", stop_after_first = true }
+      end
       conform.setup({
         formatters_by_ft = {
           lua = { "stylua" },
-          javascript = {{ "prettierd", "prettier" }},
-          javascriptreact = {{ "prettierd", "prettier" }},
+          javascript = jsFormatOptions(),
+          javascriptreact = jsFormatOptions(),
         }
       })
 
