@@ -11,6 +11,7 @@ return {
           lua = { "stylua" },
           javascript = jsFormatOptions(),
           javascriptreact = jsFormatOptions(),
+          json = { "jq" },
         }
       })
 
