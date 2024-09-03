@@ -40,15 +40,18 @@ brew "eza"
 brew "zoxide"
 cask "nextcloud"
 brew "watch"
+brew "ast-grep"
 
 # Languages and lang specific tooling
 brew "fnm"
 brew "python"
 brew "prettierd"
+brew "stylua"
 
 # Misc software
 brew "nmap"
 brew "mpv"
+brew "pipes-sh"
 
 # Terminal config
 cask "wezterm"
