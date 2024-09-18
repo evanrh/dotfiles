@@ -2,12 +2,12 @@
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/
 
+local actions_preview = require("actions-preview")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities();
-local actions_preview = require("actions-preview")
-local utils = require("utils");
+local utils = require("utils")
 local M = {}
 
 local goto_diagnostic = function(diagnostic_func)
@@ -35,10 +35,10 @@ local goto_next = function()
 end
 
 local signs = {
-  {"Error", vim.diagnostic.severity.ERROR, "" },
-  {"Warn", vim.diagnostic.severity.WARN, "" },
-  {"Hint", vim.diagnostic.severity.HINT, "✏️" },
-  {"Info", vim.diagnostic.severity.INFO, "" },
+  { "Error", vim.diagnostic.severity.ERROR, "" },
+  { "Warn", vim.diagnostic.severity.WARN, "" },
+  { "Hint", vim.diagnostic.severity.HINT, "✏️" },
+  { "Info", vim.diagnostic.severity.INFO, "" },
 }
 
 local signsConfig = {
@@ -56,20 +56,20 @@ for _, mapping in pairs(signs) do
 end
 
 vim.diagnostic.config({
-  signs = signsConfig
+  signs = signsConfig,
 })
 
 -- Keymaps for LSP
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', goto_prev)
-vim.keymap.set('n', ']d', goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", goto_prev)
+vim.keymap.set("n", "]d", goto_next)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufmap = function(mode, lhs, rhs, desc)
@@ -77,7 +77,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, lhs, rhs, opts)
     end
     -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     if client ~= nil and client.server_capabilities.inlayHintProvider then
       vim.lsp.inlay_hint.enable(true)
@@ -102,10 +102,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Base setup of mason and LSP handlers
 function M.setup()
-
-  require('lspkind').init({
-    mode = 'symbol_text',
-    preset = 'default',
+  require("lspkind").init({
+    mode = "symbol_text",
+    preset = "default",
     symbol_map = {
       Text = "󰉿",
       Method = "󰆧",
@@ -135,7 +134,7 @@ function M.setup()
     },
   })
   mason.setup()
-  mason_lspconfig.setup {
+  mason_lspconfig.setup({
     ensure_installed = {
       "lua_ls",
       "tsserver",
@@ -149,35 +148,36 @@ function M.setup()
     },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
-  }
+  })
 
-  mason_lspconfig.setup_handlers {
+  mason_lspconfig.setup_handlers({
     eslint = function()
-      lspconfig.eslint.setup {
+      lspconfig.eslint.setup({
         root_dir = lspconfig.util.root_pattern(
-        "eslint.config.js",
-        ".eslintrc.js",
-        ".eslintrc.json",
-        ".eslintrc"
+          "eslint.config.js",
+          ".eslintrc.js",
+          ".eslintrc.json",
+          ".eslintrc",
+          ".eslintrc.cjs"
         ),
-      }
+      })
     end,
 
     lua_ls = function()
-      lspconfig.lua_ls.setup {
+      lspconfig.lua_ls.setup({
         capabilities = capabilities,
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim" }
+              globals = { "vim" },
             },
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false,
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      })
     end,
 
     tsserver = function()
@@ -188,11 +188,11 @@ function M.setup()
         includePropertyDeclarationTypeHints = true,
       }
 
-      lspconfig.tsserver.setup {
+      lspconfig.tsserver.setup({
         capabilities = capabilities,
         settings = {
           implicitProjectConfiguration = {
-            checkJs = false
+            checkJs = false,
           },
           typescript = {
             inlayHints,
@@ -200,8 +200,8 @@ function M.setup()
           javascript = {
             inlayHints,
           },
-        }
-      }
+        },
+      })
     end,
 
     angularls = function()
@@ -216,7 +216,7 @@ function M.setup()
 
     tailwindcss = function()
       lspconfig.tailwindcss.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
     end,
 
@@ -226,11 +226,11 @@ function M.setup()
           json = {
             schemas = require("schemastore").json.schemas(),
             validate = { enable = true },
-          }
-        }
+          },
+        },
       })
-    end
-  }
+    end,
+  })
 end
 
 return M

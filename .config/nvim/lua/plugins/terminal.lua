@@ -1,5 +1,4 @@
 return {
   "voldikss/vim-floaterm",
-  config = function()
-  end,
+  config = function() end,
 }

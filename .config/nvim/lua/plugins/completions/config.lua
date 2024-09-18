@@ -1,26 +1,35 @@
 local result = {}
 local cmp = require("cmp")
-local luasnip = require("luasnip")
 local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
 function result.setup()
   require("luasnip.loaders.from_vscode").lazy_load()
   cmp.setup({
     enabled = function()
-      return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-      or require("cmp_dap").is_dap_buffer()
+      local bufnr = vim.api.nvim_get_current_buf()
+      return vim.bo[bufnr].buftype ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
     end,
     ghost_text = { enabled = true },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body)
-      end
+      end,
     },
     mapping = {
-      ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-      ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-      ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-      ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+      ["<Tab>"] = cmp.mapping.select_next_item({
+        behavior = cmp.SelectBehavior.Insert,
+      }),
+      ["<S-Tab>"] = cmp.mapping.select_prev_item({
+        behavior = cmp.SelectBehavior.Insert,
+      }),
+      ["<Down>"] = cmp.mapping.select_next_item({
+        behavior = cmp.SelectBehavior.Insert,
+      }),
+      ["<Up>"] = cmp.mapping.select_prev_item({
+        behavior = cmp.SelectBehavior.Insert,
+      }),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -28,11 +37,11 @@ function result.setup()
     sources = {
       { name = "path" },
       { name = "nvim_lsp", keyword_length = 1 },
-      { name = "luasnip", keyword_length = 2},
-      { name = "buffer", keyword_length = 3},
+      { name = "luasnip", keyword_length = 2 },
+      { name = "buffer", keyword_length = 3 },
     },
     window = {
-      documentation = cmp.config.window.bordered()
+      documentation = cmp.config.window.bordered(),
     },
     formatting = {
       format = lspkind.cmp_format({
@@ -40,17 +49,16 @@ function result.setup()
         maxwidth = 50,
         ellipsis_char = "...",
         show_labelDetails = true,
-      })
-    }
+      }),
+    },
   })
 
   -- Setup completions for debugger views
   cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
     sources = {
-      name = "dap"
-    }
+      name = "dap",
+    },
   })
-
 end
 
 return result

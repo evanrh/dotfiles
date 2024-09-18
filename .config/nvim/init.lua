@@ -1,11 +1,11 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
     lazypath,
   })
 end
@@ -21,7 +21,12 @@ vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.sessionoptions =
+  "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+-- Options to show spaces and tabs visually
+vim.opt.list = true
+vim.opt.lcs = "tab:»·,trail:·"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -31,8 +36,8 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.clipboard:append("unnamedplus")
 
-require("lazy").setup {
-	{ import = "plugins" },
-}
+require("lazy").setup({
+  { import = "plugins" },
+})
 
 require("keymaps").setup()

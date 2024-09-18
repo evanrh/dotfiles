@@ -8,9 +8,9 @@ return {
     local startup = require("startup")
 
     startup.create_mappings({
-      ["<leader>fs"] = "<cmd>Telescope session-lens<CR>"
+      ["<leader>fs"] = "<cmd>Telescope session-lens<CR>",
     })
 
     startup.setup()
-  end
+  end,
 }

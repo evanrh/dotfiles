@@ -9,5 +9,5 @@ return {
   },
   config = function()
     require("plugins.telescope.config").setup()
-  end
+  end,
 }

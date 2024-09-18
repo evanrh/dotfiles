@@ -11,23 +11,24 @@ return {
           lua = { "stylua" },
           javascript = jsFormatOptions(),
           javascriptreact = jsFormatOptions(),
+          typescript = jsFormatOptions(),
+          typescriptreact = jsFormatOptions(),
           json = { "jq" },
-        }
+        },
       })
 
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
           conform.format({ bufnr = args.buf })
-        end
+        end,
       })
-    end
+    end,
   },
   {
     "numToStr/Comment.nvim",
     config = function()
-
       require("Comment").setup()
-    end
-  }
+    end,
+  },
 }

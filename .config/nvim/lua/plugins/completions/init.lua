@@ -9,13 +9,13 @@ return {
     {
       "L3MON4D3/LuaSnip",
       dependencies = {
-        "rafamadriz/friendly-snippets"
-      }
+        "rafamadriz/friendly-snippets",
+      },
     },
     "rcarriga/cmp-dap",
     "onsails/lspkind.nvim",
   },
   config = function()
     require("plugins.completions.config").setup()
-  end
+  end,
 }

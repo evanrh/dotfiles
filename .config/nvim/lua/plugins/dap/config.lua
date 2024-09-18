@@ -5,7 +5,6 @@ local result = {}
 local telescope = require("telescope")
 
 function result.setup()
-
   local dap = require("dap")
   local dapui = require("dapui")
 
@@ -27,39 +26,55 @@ function result.setup()
   telescope.load_extension("dap")
 
   dapui.setup({
-    layouts = { {
-      elements = { {
-        id = "repl",
-        size = 1
-      } },
-      position = "bottom",
-      size = 10
-    }, {
-      elements = { {
-        id = "scopes",
-        size = 0.5
-      }, {
-        id = "breakpoints",
-        size = 0.5
-      } },
-      position = "left",
-      size = 30
-    },  {
-      elements = { {
-        id = "console",
-        size = 0.5
-      }, {
-        id = "watches",
-        size = 0.5
-      } },
-      position = "right",
-      size = 30
-    } }
+    layouts = {
+      {
+        elements = { {
+          id = "repl",
+          size = 1,
+        } },
+        position = "bottom",
+        size = 10,
+      },
+      {
+        elements = {
+          {
+            id = "scopes",
+            size = 0.5,
+          },
+          {
+            id = "breakpoints",
+            size = 0.5,
+          },
+        },
+        position = "left",
+        size = 30,
+      },
+      {
+        elements = {
+          {
+            id = "console",
+            size = 0.5,
+          },
+          {
+            id = "watches",
+            size = 0.5,
+          },
+        },
+        position = "right",
+        size = 30,
+      },
+    },
   })
 
   -- Setup proper signs for DAP
-  vim.fn.sign_define("DapBreakpoint", { text="🛑", texthl="", linehl="", numhl="" })
-  vim.fn.sign_define("DapStopped", { text="▶️", texthl="", linehl="", numhl="" })
+  vim.fn.sign_define(
+    "DapBreakpoint",
+    { text = "🛑", texthl = "", linehl = "", numhl = "" }
+  )
+  vim.fn.sign_define(
+    "DapStopped",
+    { text = "▶️", texthl = "", linehl = "", numhl = "" }
+  )
 
   local javascriptLangs = { "javascript", "typescript" }
 
@@ -82,7 +97,10 @@ function result.setup()
     }
   end
 
-  require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = javascriptLangs })
+  require("dap.ext.vscode").load_launchjs(
+    nil,
+    { ["pwa-node"] = javascriptLangs }
+  )
 end
 
 return result

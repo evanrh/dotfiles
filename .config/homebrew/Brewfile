@@ -41,6 +41,7 @@ brew "zoxide"
 cask "nextcloud"
 brew "watch"
 brew "ast-grep"
+brew "cloc"
 
 # Languages and lang specific tooling
 brew "fnm"
@@ -52,6 +53,8 @@ brew "stylua"
 brew "nmap"
 brew "mpv"
 brew "pipes-sh"
+brew "cava"
+
 
 # Terminal config
 cask "wezterm"

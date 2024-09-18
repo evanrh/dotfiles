@@ -10,9 +10,9 @@ return {
       require("neodev").setup({
         library = {
           plugins = { "nvim-dap-ui" },
-          types = true
-        }
+          types = true,
+        },
       })
-    end
-  }
+    end,
+  },
 }
