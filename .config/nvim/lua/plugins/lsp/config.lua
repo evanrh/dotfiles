@@ -137,7 +137,7 @@ function M.setup()
   mason_lspconfig.setup({
     ensure_installed = {
       "lua_ls",
-      "tsserver",
+      "ts_ls",
       "cssls",
       "dockerls",
       "eslint",
@@ -180,7 +180,7 @@ function M.setup()
       })
     end,
 
-    tsserver = function()
+    ts_ls = function()
       local inlayHints = {
         includeInlayFunctionParameterTypeHints = true,
         includeInlayVariableTypeHints = true,
@@ -188,7 +188,7 @@ function M.setup()
         includePropertyDeclarationTypeHints = true,
       }
 
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         capabilities = capabilities,
         settings = {
           implicitProjectConfiguration = {
