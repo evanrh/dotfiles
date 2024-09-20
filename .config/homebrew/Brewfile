@@ -1,25 +1,26 @@
 if OS.mac?
-	tap "homebrew/cask-fonts"
-	tap "koekeishiya/formulae"
+  tap "homebrew/cask-fonts"
+  tap "koekeishiya/formulae"
 
   # Work software
-	tap "heroku/brew"
-	brew "heroku"
+  tap "heroku/brew"
+  brew "heroku"
   brew "firebase-cli"
 
-	brew "trash"
+  brew "trash"
 
-	# Tiling WM - Yabai
-	brew "yabai"
-	brew "skhd"
+  # Tiling WM - Yabai
+  brew "yabai"
+  brew "skhd"
 
-	# Mac specific applications
-	cask "scroll-reverser"
+  # Mac specific applications
+  cask "scroll-reverser"
 
-	cask "font-jetbrains-mono"
-	cask "font-symbols-only-nerd-font"
-	cask "bitwarden"
+  cask "font-jetbrains-mono"
+  cask "font-symbols-only-nerd-font"
+  cask "bitwarden"
   cask "sleek"
+  case "mullvadvpn"
 end
 
 tap "homebrew/bundle"
