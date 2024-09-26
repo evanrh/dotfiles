@@ -20,7 +20,7 @@ if OS.mac?
   cask "font-symbols-only-nerd-font"
   cask "bitwarden"
   cask "sleek"
-  case "mullvadvpn"
+  cask "mullvadvpn"
 end
 
 tap "homebrew/bundle"
@@ -55,6 +55,7 @@ brew "nmap"
 brew "mpv"
 brew "pipes-sh"
 brew "cava"
+brew "gnupg"
 
 
 # Terminal config

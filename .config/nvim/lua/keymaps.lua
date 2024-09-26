@@ -26,7 +26,9 @@ function result.setup()
     { "<leader>wk", winsplit("k"), desc = "Move up" },
     { "<leader>wl", winsplit("l"), desc = "Move right" },
     { "<leader>ww", winsplit("w"), desc = "Move forward" },
-    { "<leader>wq", vim.cmd.quit, desc = "Quit" },
+    { "<leader>wW", winsplit("W"), desc = "Move backward" },
+    { "<leader>wq", vim.cmd.quitall, desc = "Quit All" },
+    { "<leader>wQ", vim.cmd.quit, desc = "Quit" },
 
     { "<leader>b", group = "buffer" },
     { "<leader>bd", bufdelete.bufdelete, desc = "Delete buffer" },
@@ -40,7 +42,7 @@ function result.setup()
     {
       "<leader>fG",
       function()
-        builtin.live_grep.live_grep({ grep_open_files = true })
+        builtin.live_grep({ grep_open_files = true })
       end,
       desc = "Live grep current working dir",
     },
