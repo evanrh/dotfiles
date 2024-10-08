@@ -56,7 +56,7 @@ brew "mpv"
 brew "pipes-sh"
 brew "cava"
 brew "gnupg"
-
+cask "docker"
 
 # Terminal config
 cask "wezterm"

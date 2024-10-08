@@ -37,7 +37,7 @@ end
 local signs = {
   { "Error", vim.diagnostic.severity.ERROR, "" },
   { "Warn", vim.diagnostic.severity.WARN, "" },
-  { "Hint", vim.diagnostic.severity.HINT, "✏️" },
+  { "Hint", vim.diagnostic.severity.HINT, "" },
   { "Info", vim.diagnostic.severity.INFO, "" },
 }
 
@@ -145,6 +145,7 @@ function M.setup()
       "tailwindcss",
       "svelte",
       "angularls",
+      "elixirls",
     },
     automatic_installation = true,
     ui = { check_outdated_servers_on_open = true },
@@ -228,6 +229,12 @@ function M.setup()
             validate = { enable = true },
           },
         },
+      })
+    end,
+
+    elixirls = function()
+      lspconfig.elixirls.setup({
+        capabilities = capabilities,
       })
     end,
   })
