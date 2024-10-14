@@ -215,9 +215,20 @@ function M.setup()
       })
     end,
 
+    --[[
+    -- Here are some relevant links for Tailwind setup
+    -- https://stackoverflow.com/questions/66614875/how-can-i-enable-tailwind-intellisense-outside-of-classname
+    -- https://www.andersevenrud.net/neovim.github.io/lsp/configurations/tailwindcss/
+    -- https://github.com/tailwindlabs/tailwindcss-intellisense?tab=readme-ov-file
+    --]]
     tailwindcss = function()
       lspconfig.tailwindcss.setup({
         capabilities = capabilities,
+        settings = {
+          tailwindCSS = {
+            classAttributes = { "class", "className", "ngClass", ".*Styles" },
+          },
+        },
       })
     end,
 

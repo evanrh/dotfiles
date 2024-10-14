@@ -14,6 +14,8 @@ return {
           typescript = jsFormatOptions(),
           typescriptreact = jsFormatOptions(),
           json = { "jq" },
+          html = jsFormatOptions(),
+          htmlangular = jsFormatOptions(),
         },
       })
 

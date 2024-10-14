@@ -27,6 +27,7 @@ function result.setup()
     { "<leader>wl", winsplit("l"), desc = "Move right" },
     { "<leader>ww", winsplit("w"), desc = "Move forward" },
     { "<leader>wW", winsplit("W"), desc = "Move backward" },
+    { "<leader>wb", winsplit("W"), desc = "Move backward" },
     { "<leader>wq", vim.cmd.quitall, desc = "Quit All" },
     { "<leader>wQ", vim.cmd.quit, desc = "Quit" },
 
