@@ -121,11 +121,6 @@ function result.setup()
     { "<leader>o", group = "open" },
     { "<leader>ot", "<cmd>FloatermNew<cr>", desc = "Open floating terminal" },
     {
-      "<leader>oT",
-      "<cmd>Neotree toggle<cr>",
-      desc = "Toggle file tree to the left",
-    },
-    {
       "<leader>ob",
       telescope.extensions.file_browser.file_browser,
       desc = "Open file browser",
@@ -135,6 +130,35 @@ function result.setup()
       "<leader>os",
       "<cmd>Spectre<cr>",
       desc = "Open Spectre for search / replace",
+    },
+
+    { "<leader>n", group = "Neotree" },
+    { "<leader>nn", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" },
+    { "<leader>nf", "<cmd>Neotree focus<cr>", desc = "Focus Neotree" },
+    {
+      "<leader>nF",
+      "<cmd>Neotree position=float<cr>",
+      desc = "Open Neotree floating",
+    },
+    {
+      "<leader>nh",
+      "<cmd>Neotree position=left<cr>",
+      desc = "Open Neotree on the left",
+    },
+    {
+      "<leader>nl",
+      "<cmd>Neotree position=right<cr>",
+      desc = "Open Neotree on the right",
+    },
+    {
+      "<leader>nj",
+      "<cmd>Neotree position=bottom<cr>",
+      desc = "Open Neotree on the bottom",
+    },
+    {
+      "<leader>nk",
+      "<cmd>Neotree position=top<cr>",
+      desc = "Open Neotree on the top",
     },
 
     { "<leader>v", group = "vim" },

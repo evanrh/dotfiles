@@ -226,7 +226,12 @@ function M.setup()
         capabilities = capabilities,
         settings = {
           tailwindCSS = {
-            classAttributes = { "class", "className", "ngClass", ".*Styles" },
+            classAttributes = {
+              "class",
+              "className",
+              "ngClass",
+              ".*Style(s*)",
+            },
           },
         },
       })
