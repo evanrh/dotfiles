@@ -26,7 +26,7 @@ alias vim="nvim"
 alias clearteams="rm -rf $HOME/Library/Group Containers/UBF8T346G9.com.microsoft.teams && rm -rf $HOME/Library/Containers/com.microsoft.teams2/Data"
 alias lg="lazygit"
 
-# DNS Flushing section
+# Common aliases based off of host system
 switch (uname)
   case Linux
     alias flushdns="sudo resolvectl flush-caches"

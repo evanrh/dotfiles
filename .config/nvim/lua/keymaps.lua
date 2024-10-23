@@ -170,6 +170,14 @@ function result.setup()
       desc = "Format current buffer",
     },
 
+    { "<leader>a", group = "ai" },
+    { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "Open AI actions" },
+    {
+      "<leader>ac",
+      "<cmd>CodeCompanionChat<cr>",
+      desc = "Open an AI chat prompt",
+    },
+
     { "S", "<cmd>Spectre<cr>", desc = "Open Spectre for search / replace" },
   })
 end
