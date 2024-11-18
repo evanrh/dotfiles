@@ -102,8 +102,8 @@ fi
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_LEFT_STATUS_SEGMENTS" ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 148 234"
-		"mode_indicator 165 0"
+		"tmux_session_info #A7C080 234"
+		"mode_indicator #859289 0"
 		#"ifstat 30 255"
 		#"ifstat_sys 30 255"
 		#"vpn 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}"
@@ -119,7 +119,7 @@ fi
 if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
 		#"earthquake 3 0"
-		"pwd 89 211"
+		"pwd #DBBC7F 0"
 		#"macos_notification_count 29 255"
 		#"mailcount 9 255"
 		"now_playing 234 37"
