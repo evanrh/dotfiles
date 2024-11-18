@@ -21,6 +21,8 @@ if OS.mac?
   cask "bitwarden"
   cask "sleek"
   cask "mullvadvpn"
+
+  brew "coreutils"
 end
 
 tap "homebrew/bundle"
@@ -61,5 +63,7 @@ cask "docker"
 # Terminal config
 cask "wezterm"
 brew "fish"
+brew "utf8proc", args: ["HEAD"]
 brew "neovim", args: ["HEAD"]
 brew "tmux"
+brew "tpm"

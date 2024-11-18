@@ -253,6 +253,12 @@ function M.setup()
         capabilities = capabilities,
       })
     end,
+
+    yamlls = function()
+      lspconfig.yamlls.setup({
+        capabilities = capabilities,
+      })
+    end,
   })
 end
 

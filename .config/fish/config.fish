@@ -34,8 +34,11 @@ switch (uname)
     alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
     alias bfupdate="brew bundle --file ~/.config/homebrew/Brewfile"
+    alias realpath="grealpath"
 end
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export DENO_INSTALL="/home/evanrh/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
