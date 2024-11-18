@@ -20,7 +20,7 @@
 	export TMUX_POWERLINE_STATUS_VISIBILITY="on"
 	# In case of visibility = 2, where to display window status and where left/right status bars.
 	# 0: window status top, left/right status bottom; 1: window status bottom, left/right status top
-	export TMUX_POWERLINE_WINDOW_STATUS_LINE=0
+	export TMUX_POWERLINE_WINDOW_STATUS_LINE="0"
 	# The status bar refresh interval in seconds.
 	# Note that events that force-refresh the status bar (such as window renaming) will ignore this.
 	export TMUX_POWERLINE_STATUS_INTERVAL="1"
