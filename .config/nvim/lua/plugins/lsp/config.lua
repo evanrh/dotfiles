@@ -259,6 +259,12 @@ function M.setup()
         capabilities = capabilities,
       })
     end,
+
+    astro = function()
+      lspconfig.astro.setup({
+        capabilities = capabilities,
+      })
+    end,
   })
 end
 

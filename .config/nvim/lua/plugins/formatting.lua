@@ -16,6 +16,7 @@ return {
           json = { "jq" },
           html = jsFormatOptions(),
           htmlangular = jsFormatOptions(),
+          astro = { "prettier" },
         },
       })
 

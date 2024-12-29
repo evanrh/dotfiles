@@ -37,6 +37,7 @@ brew "tree"
 brew "bat"
 brew "htop"
 brew "jq"
+brew "yq"
 brew "neofetch"
 brew "lazygit"
 brew "eza"
@@ -66,4 +67,5 @@ brew "fish"
 brew "utf8proc", args: ["HEAD"]
 brew "neovim", args: ["HEAD"]
 brew "tmux"
+brew "smug"
 brew "tpm"
