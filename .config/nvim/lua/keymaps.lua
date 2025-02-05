@@ -30,6 +30,14 @@ function result.setup()
     { "<leader>wb", winsplit("W"), desc = "Move backward" },
     { "<leader>wq", vim.cmd.quitall, desc = "Quit All" },
     { "<leader>wQ", vim.cmd.quit, desc = "Quit" },
+    {
+      "<leader>w=",
+      function()
+        vim.cmd("vertical wincmd =")
+        vim.cmd("horizontal wincmd =")
+      end,
+      desc = "Even window splits",
+    },
 
     { "<leader>b", group = "buffer" },
     { "<leader>bd", bufdelete.bufdelete, desc = "Delete buffer" },
