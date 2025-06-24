@@ -19,9 +19,6 @@ if OS.mac?
   cask "font-jetbrains-mono"
   cask "font-symbols-only-nerd-font"
   cask "bitwarden"
-  cask "sleek"
-  cask "mullvadvpn"
-
   brew "coreutils"
 end
 

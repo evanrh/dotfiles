@@ -1,4 +1,6 @@
 local result = {}
+local actions = require("telescope.actions")
+local actions_state = require("telescope.actions.state")
 local bufdelete = require("bufdelete")
 local builtin = require("telescope.builtin")
 local conform = require("conform")
@@ -10,6 +12,29 @@ local function winsplit(direction)
   return function()
     vim.cmd.wincmd(direction)
   end
+end
+
+local function buffer_search()
+  builtin.buffers({
+    sort_mru = true,
+    ignore_current_buffer = false,
+    show_all_buffers = true,
+    attach_mappings = function(prompt_bufnr, map)
+      local refresh = function()
+        actions.close(prompt_bufnr)
+        vim.schedule(buffer_search)
+      end
+
+      local delete = function()
+        local selection = actions_state.get_selected_entry()
+        bufdelete.bufdelete({ selection.bufnr })
+        refresh()
+      end
+
+      map("n", "dd", delete)
+      return true
+    end,
+  })
 end
 
 function result.setup()
@@ -55,7 +80,7 @@ function result.setup()
       end,
       desc = "Live grep current working dir",
     },
-    { "<leader>fb", builtin.buffers, desc = "Search active buffers" },
+    { "<leader>fb", buffer_search, desc = "Search active buffers" },
     { "<leader>fh", builtin.help_tags, desc = "Search vim help" },
     { "<leader>fm", builtin.man_pages, desc = "Search man pages" },
     {
@@ -184,6 +209,28 @@ function result.setup()
       "<leader>ac",
       "<cmd>CodeCompanionChat<cr>",
       desc = "Open an AI chat prompt",
+    },
+
+    { "<leader>q", group = "Quickfix" },
+    {
+      "<leader>qo",
+      vim.cmd.copen,
+      desc = "Open quickfix",
+    },
+    {
+      "<leader>qc",
+      vim.cmd.cclose,
+      desc = "Close quickfix",
+    },
+    {
+      "<leader>q[",
+      vim.cmd.cprevious,
+      desc = "Go to previous entry",
+    },
+    {
+      "<leader>q]",
+      vim.cmd.cnext,
+      desc = "Go to next entry",
     },
 
     { "S", "<cmd>Spectre<cr>", desc = "Open Spectre for search / replace" },

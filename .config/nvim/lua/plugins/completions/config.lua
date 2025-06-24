@@ -5,6 +5,8 @@ local luasnip = require("luasnip")
 
 function result.setup()
   require("luasnip.loaders.from_vscode").lazy_load()
+  luasnip.filetype_extend("typescript", { "angular" })
+  luasnip.filetype_extend("html", { "angular" })
   cmp.setup({
     enabled = function()
       local bufnr = vim.api.nvim_get_current_buf()

@@ -189,6 +189,13 @@ function M.setup()
         includePropertyDeclarationTypeHints = true,
       }
 
+      local preferences = {
+        autoImportFileExcludePatterns = {
+          "@ionic/angular/common",
+          "@ionic/angular",
+        },
+      }
+
       lspconfig.ts_ls.setup({
         capabilities = capabilities,
         settings = {
@@ -197,9 +204,11 @@ function M.setup()
           },
           typescript = {
             inlayHints,
+            preferences,
           },
           javascript = {
             inlayHints,
+            preferences,
           },
         },
       })
@@ -228,7 +237,7 @@ function M.setup()
           tailwindCSS = {
             classAttributes = {
               "class",
-              "className",
+              ".*className",
               "ngClass",
               ".*Style(s*)",
             },

@@ -20,6 +20,14 @@ return {
         },
       })
 
+      conform.formatters.prettierd = {
+        env = {
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand(
+            "~/.config/prettier/prettierrc.json"
+          ),
+        },
+      }
+
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function(args)
