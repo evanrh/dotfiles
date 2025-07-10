@@ -20,15 +20,21 @@ if OS.mac?
   cask "font-symbols-only-nerd-font"
   cask "bitwarden"
   brew "coreutils"
+  cask "nextcloud"
+  brew "nmap"
+  brew "mpv"
+  brew "cava"
+  brew "gnupg"
+  cask "docker"
+  cask "wezterm"
+  brew "fish"
+  brew "git"
 end
-
-tap "homebrew/bundle"
 
 # Tools
 brew "ripgrep"
 brew "fzf"
 brew "fd"
-brew "git"
 brew "git-filter-repo"
 brew "tree"
 brew "bat"
@@ -39,7 +45,6 @@ brew "neofetch"
 brew "lazygit"
 brew "eza"
 brew "zoxide"
-cask "nextcloud"
 brew "watch"
 brew "ast-grep"
 brew "cloc"
@@ -51,16 +56,9 @@ brew "prettierd"
 brew "stylua"
 
 # Misc software
-brew "nmap"
-brew "mpv"
 brew "pipes-sh"
-brew "cava"
-brew "gnupg"
-cask "docker"
 
 # Terminal config
-cask "wezterm"
-brew "fish"
 brew "utf8proc", args: ["HEAD"]
 brew "neovim", args: ["HEAD"]
 brew "tmux"

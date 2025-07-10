@@ -70,9 +70,9 @@ switch (uname)
   case Darwin
     alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
-    alias bfupdate="brew bundle --file ~/.config/homebrew/Brewfile"
     alias realpath="grealpath"
 end
+alias bfupdate="brew bundle --file ~/.config/homebrew/Brewfile"
 
 export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
