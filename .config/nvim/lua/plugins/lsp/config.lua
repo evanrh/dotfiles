@@ -151,7 +151,7 @@ function M.setup()
     ui = { check_outdated_servers_on_open = true },
   })
 
-  mason_lspconfig.setup_handlers({
+  mason_lspconfig.setup({
     eslint = function()
       lspconfig.eslint.setup({
         root_dir = lspconfig.util.root_pattern(
