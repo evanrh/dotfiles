@@ -37,6 +37,7 @@ function result.setup()
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
     sources = {
+      { name = "copilot", keyword_length = 1 },
       { name = "path" },
       { name = "nvim_lsp", keyword_length = 1 },
       { name = "luasnip", keyword_length = 2 },

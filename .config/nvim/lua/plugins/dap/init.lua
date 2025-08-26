@@ -1,6 +1,8 @@
 return {
+  lazy = true,
   {
     "mfussenegger/nvim-dap",
+    dkeys = "<leader>dr",
     config = function()
       require("plugins.dap.config").setup()
     end,

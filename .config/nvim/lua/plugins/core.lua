@@ -5,14 +5,9 @@ return {
     config = true,
   },
   {
-    "folke/neodev.nvim",
+    "folke/lazydev.nvim",
     config = function()
-      require("neodev").setup({
-        library = {
-          plugins = { "nvim-dap-ui" },
-          types = true,
-        },
-      })
+      require("lazydev").setup()
     end,
   },
 }
