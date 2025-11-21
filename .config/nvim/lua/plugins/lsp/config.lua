@@ -3,11 +3,9 @@
 -- https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/
 
 local actions_preview = require("actions-preview")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
 local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 local utils = require("utils")
+local ts_tools = require("typescript-tools")
 local M = {}
 
 local goto_diagnostic = function(diagnostic_func)
@@ -102,6 +100,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Base setup of mason and LSP handlers
 function M.setup()
+
   require("lspkind").init({
     mode = "symbol_text",
     preset = "default",
@@ -134,147 +133,21 @@ function M.setup()
     },
   })
   mason.setup()
-  mason_lspconfig.setup({
-    ensure_installed = {
-      "lua_ls",
-      "ts_ls",
-      "cssls",
-      "dockerls",
-      "eslint",
-      "jsonls",
-      "tailwindcss",
-      "svelte",
-      "angularls",
-      "elixirls",
-    },
-    automatic_installation = true,
-    ui = { check_outdated_servers_on_open = true },
-  })
 
-  mason_lspconfig.setup({
-    eslint = function()
-      lspconfig.eslint.setup({
-        root_dir = lspconfig.util.root_pattern(
-          "eslint.config.js",
-          ".eslintrc.js",
-          ".eslintrc.json",
-          ".eslintrc",
-          ".eslintrc.cjs"
-        ),
-      })
-    end,
-
-    lua_ls = function()
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-          },
-        },
-      })
-    end,
-
-    ts_ls = function()
-      local inlayHints = {
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includePropertyDeclarationTypeHints = true,
+  ts_tools.setup({
+    settings = {
+      separate_diagnostic_server = true,
+      tsserver_file_preferences = {
+        -- List of options located here:
+        -- https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3439
+        includeInlayFunctionParameterTypeHints = false,
+        includeInlayVariableTypeHints = false,
+        includeInlayFunctionLikeReturnTypeHints = false,
+        includePropertyDeclarationTypeHints = false,
       }
-
-      local preferences = {
-        autoImportFileExcludePatterns = {
-          "@ionic/angular/common",
-          "@ionic/angular",
-        },
-      }
-
-      lspconfig.ts_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          implicitProjectConfiguration = {
-            checkJs = false,
-          },
-          typescript = {
-            inlayHints,
-            preferences,
-          },
-          javascript = {
-            inlayHints,
-            preferences,
-          },
-        },
-      })
-    end,
-
-    angularls = function()
-      lspconfig.angularls.setup({})
-    end,
-
-    cssls = function()
-      lspconfig.cssls.setup({
-        capabilities = capabilities,
-      })
-    end,
-
-    --[[
-    -- Here are some relevant links for Tailwind setup
-    -- https://stackoverflow.com/questions/66614875/how-can-i-enable-tailwind-intellisense-outside-of-classname
-    -- https://www.andersevenrud.net/neovim.github.io/lsp/configurations/tailwindcss/
-    -- https://github.com/tailwindlabs/tailwindcss-intellisense?tab=readme-ov-file
-    --]]
-    tailwindcss = function()
-      lspconfig.tailwindcss.setup({
-        capabilities = capabilities,
-        settings = {
-          tailwindCSS = {
-            classAttributes = {
-              "class",
-              ".*className",
-              "ngClass",
-              ".*Style(s*)",
-            },
-          },
-        },
-      })
-    end,
-
-    jsonls = function()
-      lspconfig.jsonls.setup({
-        settings = {
-          json = {
-            schemas = require("schemastore").json.schemas(),
-            validate = { enable = true },
-          },
-        },
-      })
-    end,
-
-    elixirls = function()
-      lspconfig.elixirls.setup({
-        capabilities = capabilities,
-      })
-    end,
-
-    yamlls = function()
-      lspconfig.yamlls.setup({
-        capabilities = capabilities,
-      })
-    end,
-
-    astro = function()
-      lspconfig.astro.setup({
-        capabilities = capabilities,
-      })
-    end,
+    }
   })
+  vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls" })
 end
 
 return M
