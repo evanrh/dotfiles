@@ -8,14 +8,9 @@ return {
         buftypes_to_ignore = {},
         load_on_setup = true,
         theme_conf = { border = true },
-        previewer = false,
+        picker = "telescope",
       }
     })
-
-    vim.keymap.set("n", "<leader>fs",
-      require("auto-session.session-lens").search_session,
-      { noremap = true, desc = "Search sessions" }
-    )
 
     require("telescope").load_extension("session-lens")
   end

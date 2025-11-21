@@ -7,11 +7,11 @@ function result.setup()
   require("luasnip.loaders.from_vscode").lazy_load()
   luasnip.filetype_extend("typescript", { "angular" })
   luasnip.filetype_extend("html", { "angular" })
+
   cmp.setup({
     enabled = function()
       local bufnr = vim.api.nvim_get_current_buf()
       return vim.bo[bufnr].buftype ~= "prompt"
-        or require("cmp_dap").is_dap_buffer()
     end,
     ghost_text = { enabled = true },
     snippet = {
@@ -56,12 +56,29 @@ function result.setup()
     },
   })
 
-  -- Setup completions for debugger views
-  cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+  cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      name = "dap",
-    },
-  })
+      { name = "buffer" }
+    }
+  });
+
+  cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+      {
+        { name = "path" }
+      },
+      {
+        {
+          name = "cmdline",
+          option = {
+            ignore_cmds = { "Man", "!" },
+          }
+        }
+      }
+    )
+  });
 end
 
 return result

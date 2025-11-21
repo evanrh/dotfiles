@@ -13,8 +13,8 @@ return {
         "rafamadriz/friendly-snippets",
       },
     },
-    "rcarriga/cmp-dap",
     "onsails/lspkind.nvim",
+    "hrsh7th/cmp-cmdline",
   },
   config = function()
     require("plugins.completions.config").setup()

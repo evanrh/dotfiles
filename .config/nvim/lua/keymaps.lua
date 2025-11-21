@@ -4,7 +4,6 @@ local actions_state = require("telescope.actions.state")
 local bufdelete = require("bufdelete")
 local builtin = require("telescope.builtin")
 local conform = require("conform")
-local dap = require("dap")
 local telescope = require("telescope")
 local wk = require("which-key")
 
@@ -84,11 +83,6 @@ function result.setup()
     { "<leader>fh", builtin.help_tags, desc = "Search vim help" },
     { "<leader>fm", builtin.man_pages, desc = "Search man pages" },
     {
-      "<leader>fe",
-      telescope.extensions.nerdy.nerdy,
-      desc = "Search Nerd Font symbols",
-    },
-    {
       "<leader>fc",
       function()
         vim.lsp.buf.code_action()
@@ -122,26 +116,6 @@ function result.setup()
         vim.lsp.buf.references()
       end,
       desc = "List references to symbol",
-    },
-
-    { "<leader>d", group = "debugger" },
-    { "<leader>db", dap.toggle_breakpoint, desc = "Toggle breakpoint" },
-    { "<leader>dr", dap.continue, desc = "Start / Continue debugger" },
-    {
-      "<leader>dB",
-      telescope.extensions.dap.list_breakpoints,
-      desc = "List breakpoints",
-    },
-    { "<leader>di", dap.step_into, desc = "Step into" },
-    { "<leader>dI", dap.step_out, desc = "Step out" },
-    { "<leader>do", dap.step_over, desc = "Step over" },
-    { "<leader>dq", dap.terminate, desc = "Quit session" },
-    {
-      "<leader>dc",
-      function()
-        dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-      end,
-      desc = "Set conditional breakpoint",
     },
 
     { "<leader>t", group = "tabs" },

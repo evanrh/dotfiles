@@ -36,6 +36,8 @@ return {
       },
     })
 
+    require("treesitter-context").setup()
+
     require("nvim-ts-autotag").setup({
       opts = {
         enable_close = true,
