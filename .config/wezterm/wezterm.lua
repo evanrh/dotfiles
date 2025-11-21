@@ -64,11 +64,13 @@ config.window_padding = {
 wezterm.on("gui-startup", function()
 	local tab, pane, window = mux.spawn_window(cmd or {})
 	local gui_window = window:gui_window()
-	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
 
 config.color_scheme = "Tokyo Night Storm"
 config.enable_scroll_bar = true
-config.font_size = 16
+config.font_size = 12
 config.native_macos_fullscreen_mode = true
+
+-- Spawn a fish shell in login mode
+config.default_prog = { '/usr/bin/fish', '-l' }
 return config
