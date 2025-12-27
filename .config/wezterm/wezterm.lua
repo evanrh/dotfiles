@@ -9,7 +9,9 @@ end
 
 config.wsl_domains = wezterm.default_wsl_domains()
 
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+local system = string.lower(wezterm.target_triple)
+
+if string.find(system, "windows") then
 	local domains = wezterm.default_wsl_domains()
 
 	-- Setup launch menu for a Windows config
@@ -28,6 +30,12 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	if #domains > 0 then
 		config.default_domain = domains[1].name
 	end
+end
+
+if string.find(system, "apple") then
+	config.font_size = 14
+else
+	config.font_size = 12
 end
 
 config.leader = { key = "Space", mods = "CTRL" }
@@ -68,9 +76,8 @@ end)
 
 config.color_scheme = "Tokyo Night Storm"
 config.enable_scroll_bar = true
-config.font_size = 12
 config.native_macos_fullscreen_mode = true
 
 -- Spawn a fish shell in login mode
-config.default_prog = { '/usr/bin/fish', '-l' }
+-- config.default_prog = { "/usr/bin/env", "fish" }
 return config
