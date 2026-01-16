@@ -2,7 +2,6 @@
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/
 
-local actions_preview = require("actions-preview")
 local mason = require("mason")
 local utils = require("utils")
 local ts_tools = require("typescript-tools")
@@ -94,7 +93,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     bufmap("n", "gl", vim.diagnostic.open_float, "Show diagnostics")
     bufmap("n", "[d", goto_prev, "Goto previous diagnostic")
     bufmap("n", "]d", goto_next, "Goto next diagnostic")
-    bufmap("n", "ga", actions_preview.code_actions, "View code actions")
   end,
 })
 
@@ -134,20 +132,20 @@ function M.setup()
   })
   mason.setup()
 
-  ts_tools.setup({
-    settings = {
-      separate_diagnostic_server = true,
-      tsserver_file_preferences = {
-        -- List of options located here:
-        -- https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3439
-        includeInlayFunctionParameterTypeHints = false,
-        includeInlayVariableTypeHints = false,
-        includeInlayFunctionLikeReturnTypeHints = false,
-        includePropertyDeclarationTypeHints = false,
-      }
-    }
-  })
-  vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls" })
+  -- ts_tools.setup({
+  --   settings = {
+  --     separate_diagnostic_server = true,
+  --     tsserver_file_preferences = {
+  --       -- List of options located here:
+  --       -- https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3439
+  --       includeInlayFunctionParameterTypeHints = false,
+  --       includeInlayVariableTypeHints = false,
+  --       includeInlayFunctionLikeReturnTypeHints = false,
+  --       includePropertyDeclarationTypeHints = false,
+  --     }
+  --   }
+  -- })
+  vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls", "tsgo" })
 end
 
 return M

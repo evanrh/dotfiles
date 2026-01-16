@@ -1,14 +1,15 @@
 return {
-  "neovim/nvim-lspconfig",
-  event = "VeryLazy",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "onsails/lspkind.nvim",
-    "aznhe21/actions-preview.nvim",
-    "b0o/SchemaStore.nvim",
-    "pmizio/typescript-tools.nvim"
+  {
+    "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "onsails/lspkind.nvim",
+      "pmizio/typescript-tools.nvim"
+    },
+    config = function()
+      require("plugins.lsp.config").setup()
+    end,
   },
-  config = function()
-    require("plugins.lsp.config").setup()
-  end,
+  { "b0o/SchemaStore.nvim" }
 }
