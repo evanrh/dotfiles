@@ -1,6 +1,12 @@
 return {
-  "olimorris/codecompanion.nvim",
+  "folke/sidekick.nvim",
   config = function()
-    require("plugins.ai.config").setup()
+    require("sidekick").setup()
   end,
+  opts = {
+    nes = { enabled = false }
+  },
+  dependencies = {
+    "zbirenbaum/copilot.lua"
+  }
 }

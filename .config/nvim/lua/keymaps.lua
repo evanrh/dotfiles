@@ -5,6 +5,7 @@ local bufdelete = require("bufdelete")
 local builtin = require("telescope.builtin")
 local conform = require("conform")
 local telescope = require("telescope")
+local todo_comments = require("todo-comments")
 local wk = require("which-key")
 
 local function winsplit(direction)
@@ -70,8 +71,8 @@ function result.setup()
     { "<leader>b]", vim.cmd.bnext, desc = "Goto next buffer" },
 
     { "<leader>f", group = "fuzzy find" },
-    { "<leader>ff", builtin.find_files, desc = "Find files" },
-    { "<leader>fg", builtin.live_grep, desc = "Live grep current working dir" },
+    { "<leader>ff", function() builtin.find_files({ hidden = true }) end, desc = "Find files" },
+    { "<leader>fg", function() builtin.live_grep({ hidden = true }) end, desc = "Live grep current working dir" },
     {
       "<leader>fG",
       function()
@@ -94,6 +95,7 @@ function result.setup()
       telescope.extensions.ast_grep.ast_grep,
       desc = "Live AST grep",
     },
+    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Search man pages" },
 
     { "<leader>l", group = "LSP" },
     {
@@ -178,12 +180,7 @@ function result.setup()
     },
 
     { "<leader>a", group = "ai" },
-    { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "Open AI actions" },
-    {
-      "<leader>ac",
-      "<cmd>CodeCompanionChat<cr>",
-      desc = "Open an AI chat prompt",
-    },
+    { "<leader>aa", function() require("sidekick.cli").toggle() end, desc = "Open AI actions" },
 
     { "<leader>q", group = "Quickfix" },
     {
@@ -208,6 +205,8 @@ function result.setup()
     },
 
     { "S", "<cmd>Spectre<cr>", desc = "Open Spectre for search / replace" },
+    { "[t", todo_comments.jump_prev, desc = "Previous todo comment" },
+    { "]t", todo_comments.jump_next, desc = "Next todo comment" },
   })
 end
 
