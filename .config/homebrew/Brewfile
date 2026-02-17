@@ -1,10 +1,6 @@
 if OS.mac?
   tap "koekeishiya/formulae"
 
-  # Work software
-  tap "heroku/brew"
-  brew "heroku"
-
   brew "trash"
 
   # Tiling WM - Yabai
