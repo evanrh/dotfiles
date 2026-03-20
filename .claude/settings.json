@@ -1,0 +1,21 @@
+{
+  "model": "opusplan",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/claudetop.sh",
+    "padding": 1
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/evanhastings/.claude/hooks/claudetop-session-end.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
