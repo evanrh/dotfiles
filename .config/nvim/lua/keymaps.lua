@@ -181,6 +181,8 @@ function result.setup()
 
     { "<leader>a", group = "ai" },
     { "<leader>aa", function() require("sidekick.cli").toggle() end, desc = "Open AI actions" },
+    { "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send file"},
+    { "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, desc = "Send visual selection", mode = { "x" }},
 
     { "<leader>q", group = "Quickfix" },
     {

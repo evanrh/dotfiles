@@ -4,8 +4,8 @@
 
 local actions_preview = require("actions-preview")
 local mason = require("mason")
-local utils = require("utils")
 local ts_tools = require("typescript-tools")
+local utils = require("utils")
 local M = {}
 
 local goto_diagnostic = function(diagnostic_func)
@@ -100,7 +100,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Base setup of mason and LSP handlers
 function M.setup()
-
   require("lspkind").init({
     mode = "symbol_text",
     preset = "default",
@@ -148,6 +147,15 @@ function M.setup()
     }
   })
   vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls" })
+
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "typescript", "html", "typescriptreact", "htmlangular" },
+    callback = function(ev)
+      local root = vim.fs.root(ev.buf, { "angular.json", "nx.json" })
+      if not root then return end
+      vim.lsp.start(vim.tbl_extend("force", vim.lsp.config["angularls"], { root_dir = root }))
+    end,
+  })
 end
 
 return M
