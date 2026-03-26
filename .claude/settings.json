@@ -1,10 +1,5 @@
 {
   "model": "opusplan",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/claudetop.sh",
-    "padding": 1
-  },
   "hooks": {
     "SessionEnd": [
       {
@@ -17,5 +12,13 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/claudetop.sh",
+    "padding": 1
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
   }
 }
