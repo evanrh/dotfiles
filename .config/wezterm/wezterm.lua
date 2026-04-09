@@ -80,4 +80,5 @@ config.native_macos_fullscreen_mode = true
 
 -- Spawn a fish shell in login mode
 -- config.default_prog = { "/usr/bin/env", "fish" }
+config.term = "wezterm"
 return config

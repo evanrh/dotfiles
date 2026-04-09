@@ -1,5 +1,8 @@
 {
   "model": "opusplan",
+  "permissions": {
+    "allow": ["Read", "Edit", "Write", "Glob", "Grep", "Agent", "TaskCreate", "TaskUpdate", "TaskGet", "TaskList", "TaskOutput", "TaskStop", "Skill", "ToolSearch", "WebFetch", "WebSearch"]
+  },
   "hooks": {
     "SessionEnd": [
       {
@@ -19,6 +22,7 @@
     "padding": 1
   },
   "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
   }
 }
