@@ -23,6 +23,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.sessionoptions =
   "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.opt.guicursor = ""
 
 -- Options to show spaces and tabs visually
 vim.opt.list = true

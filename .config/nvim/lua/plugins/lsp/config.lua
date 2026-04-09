@@ -146,7 +146,7 @@ function M.setup()
       }
     }
   })
-  vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls" })
+  vim.lsp.enable({ "lua_ls", "cssls", "jsonls", "yamlls", "expert" })
 
   vim.api.nvim_create_autocmd("FileType", {
     pattern = { "typescript", "html", "typescriptreact", "htmlangular" },
