@@ -35,7 +35,6 @@ Create well-formatted git commits following conventional commit standards.
 1. Concise in the description, and brief but informative in the body
 2. Footer is a markdown link to the ticket number for the work
 3. No more than 72 characters in the description, including the type and scope
-4. Do NOT include a `Co-Authored-By` trailer or any Claude attribution
 
 
 ## Example Output

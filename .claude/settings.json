@@ -1,9 +1,40 @@
 {
-  "model": "opusplan",
   "permissions": {
-    "allow": ["Read", "Edit", "Write", "Glob", "Grep", "Agent", "TaskCreate", "TaskUpdate", "TaskGet", "TaskList", "TaskOutput", "TaskStop", "Skill", "ToolSearch", "WebFetch", "WebSearch"]
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Agent",
+      "TaskCreate",
+      "TaskUpdate",
+      "TaskGet",
+      "TaskList",
+      "TaskOutput",
+      "TaskStop",
+      "Skill",
+      "ToolSearch",
+      "WebFetch",
+      "WebSearch"
+    ]
   },
+  "model": "opusplan",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "The model is about to run a git commit. Inject context instructing it to run a code review of the staged changes before committing. The model should check the available skills list for any code review skill and invoke it — if none exists, perform a manual review of the diff. Return JSON: {\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"additionalContext\": \"Before running this git commit, you MUST perform a code review of the staged changes first. Check your available skills for a code review skill and invoke it. If no such skill is available, manually review the staged diff for issues. Only proceed with the commit after the review is complete.\"}}",
+            "if": "Bash(git commit*)",
+            "timeout": 30,
+            "statusMessage": "Running pre-commit review..."
+          }
+        ]
+      }
+    ],
     "SessionEnd": [
       {
         "matcher": "",
@@ -23,6 +54,22 @@
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "caveman@caveman": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
+  },
+  "remoteControlAtStartup": false,
+  "skipAutoPermissionPrompt": true,
+  "env": {
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "DISABLE_AUTOUPDATER": "1"
   }
 }
