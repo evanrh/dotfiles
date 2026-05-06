@@ -60,6 +60,12 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.SpawnTab("DefaultDomain"),
 	},
+	-- Send CSI u key on Shift+Enter (fixes Claude Code newlines)
+{
+		key = 'Enter',
+		mods = 'SHIFT',
+		action = wezterm.action.SendString('\x1b[13;2u'),
+	},
 }
 
 config.window_padding = {
@@ -77,8 +83,8 @@ end)
 config.color_scheme = "Tokyo Night Storm"
 config.enable_scroll_bar = true
 config.native_macos_fullscreen_mode = true
+config.term = "wezterm"
 
 -- Spawn a fish shell in login mode
 -- config.default_prog = { "/usr/bin/env", "fish" }
-config.term = "wezterm"
 return config
