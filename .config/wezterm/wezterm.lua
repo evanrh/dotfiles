@@ -80,7 +80,8 @@ wezterm.on("gui-startup", function()
 	local gui_window = window:gui_window()
 end)
 
-config.color_scheme = "Tokyo Night Storm"
+config.color_scheme_dirs = { "~/.config/wezterm/colors", }
+config.color_scheme = "Everforest Dark (Medium)"
 config.enable_scroll_bar = true
 config.native_macos_fullscreen_mode = true
 config.term = "wezterm"
