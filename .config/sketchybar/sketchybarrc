@@ -1,23 +1,57 @@
+# vim: set ft=bash
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="Hack Nerd Font:Bold:15.0"
+  label.font="SF Pro:Semibold:15.0"
+  #icon.color=0xffffffff
+  icon.color=$WHITE
+  #label.color=0xffffffff
+  label.color=$WHITE
+  icon.padding_left=5
+  icon.padding_right=5
+  label.padding_left=5
+  label.padding_right=5
+  updates=on
+)
+sketchybar --default "${default[@]}"
 sketchybar --add event aerospace_workspace_change
 
 for sid in $(aerospace list-workspaces --all); do
     sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color=0x44ffffff \
-        background.corner_radius=5 \
-        background.height=20 \
-        background.drawing=off \
-        label.padding_left=5 \
-        label.padding_right=5 \
-        icon.padding_left=5 \
-        icon.padding_right=5 \
-        label="$sid" \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+      --subscribe space.$sid aerospace_workspace_change \
+      --set space.$sid \
+      background.color=0x44ffffff \
+      background.corner_radius=5 \
+      background.height=20 \
+      background.drawing=off \
+      label="$sid" \
+      click_script="aerospace workspace $sid" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
-sketchybar --set space.1 label="1:terminal"
-sketchybar --set space.2 label="2:firefox"
-sketchybar --set space.3 label="3:teams"
-sketchybar --set space.4 label="4:outlook"
+sketchybar --set space.1 label="1" icon=
+sketchybar --set space.2 label="2" icon=󰈹
+sketchybar --set space.3 label="3" icon=󰊻
+sketchybar --set space.4 label="4" icon=󰴢
+sketchybar --set space.5 label="5" icon=
+
+sketchybar --add item clock right \
+  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+  --add item volume right \
+  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change \
+  --add item battery right \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+  --add item swap e \
+  icon="" \
+  label.font="Symbols Nerd Font" \
+  icon.color=0x44FFFFFF \
+  label.color=0x44FFFFFF
+
+sketchybar --update
