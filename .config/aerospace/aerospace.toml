@@ -140,6 +140,7 @@ on-window-detected = [
   vertical = 10
 
 [gaps.outer]
+  # Conditional on retina display. Retina has the notch, others don't. Fixes rendering over sketchybar
   top = [{ monitor."Built-in Retina Display" = 15 }, 45]
   left = 5
   bottom = 5
