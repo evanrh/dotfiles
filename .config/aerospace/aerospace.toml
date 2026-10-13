@@ -1,0 +1,146 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+config-version = 2
+
+# In i3, all workspaces are phantom
+persistent-workspaces = []
+
+# i3 doesn't have "normalizations" feature that why we disable them here.
+# But the feature is very helpful.
+# Normalizations eliminate all sorts of weird tree configurations that don't make sense.
+# Give normalizations a chance and enable them back.
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+start-at-login = true
+
+# Run Sketchybar together with AeroSpace
+# sketchybar has a built-in detection of already running process,
+# so it won't be run twice on AeroSpace restart
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+ # Mouse lazily follows focused monitor (default in i3)
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+on-window-detected = [
+  {
+    if = 'test %{app-bundle-id} = com.github.wez.wezterm',
+    run = 'move-node-to-workspace 1'
+  },
+  {
+    if = 'test %{app-bundle-id} = org.mozilla.firefox',
+    run = 'move-node-to-workspace 2'
+  },
+  {
+    if = 'test %{app-bundle-id} = com.microsoft.teams2',
+    run = 'move-node-to-workspace 3'
+  },
+  {
+    if = 'test %{app-bundle-id} = com.microsoft.Outlook',
+    run = 'move-node-to-workspace 4'
+  },
+  {
+    if = 'test %{app-bundle-id} = com.linear',
+    run = 'move-node-to-workspace 5'
+  },
+  {
+    if = 'test %{app-bundle-id} = md.obsidian',
+    run = 'move-node-to-workspace 5'
+  },
+]
+[mode.main.binding]
+  # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
+  alt-enter = 'exec-and-forget wezterm'
+
+  # i3 wraps focus by default
+  alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
+  alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
+  alt-k = 'focus --boundaries-action wrap-around-the-workspace up'
+  alt-l = 'focus --boundaries-action wrap-around-the-workspace right'
+
+  alt-shift-h = 'move left'
+  alt-shift-j = 'move down'
+  alt-shift-k = 'move up'
+  alt-shift-l = 'move right'
+
+  # Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
+  alt-minus = 'split horizontal'
+  alt-shift-backslash = 'split vertical'
+
+  alt-f = 'fullscreen'
+
+  alt-s = 'layout v_accordion' # 'layout stacking' in i3
+  alt-w = 'layout h_accordion' # 'layout tabbed' in i3
+  alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+  alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+  # Not supported, because this command is redundant in AeroSpace mental model.
+  # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+  #alt-space = 'focus toggle_tiling_floating'
+
+  # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+  # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+  # alt-a = 'focus parent'
+
+  alt-1 = 'workspace 1'
+  alt-2 = 'workspace 2'
+  alt-3 = 'workspace 3'
+  alt-4 = 'workspace 4'
+  alt-5 = 'workspace 5'
+  alt-6 = 'workspace 6'
+  alt-7 = 'workspace 7'
+  alt-8 = 'workspace 8'
+  alt-9 = 'workspace 9'
+  alt-0 = 'workspace 10'
+
+  alt-shift-1 = 'move-node-to-workspace 1'
+  alt-shift-2 = 'move-node-to-workspace 2'
+  alt-shift-3 = 'move-node-to-workspace 3'
+  alt-shift-4 = 'move-node-to-workspace 4'
+  alt-shift-5 = 'move-node-to-workspace 5'
+  alt-shift-6 = 'move-node-to-workspace 6'
+  alt-shift-7 = 'move-node-to-workspace 7'
+  alt-shift-8 = 'move-node-to-workspace 8'
+  alt-shift-9 = 'move-node-to-workspace 9'
+  alt-shift-0 = 'move-node-to-workspace 10'
+
+  alt-shift-c = 'reload-config'
+
+  alt-r = 'mode resize'
+
+[mode.resize.binding]
+  h = 'resize width -50'
+  j = 'resize height +50'
+  k = 'resize height -50'
+  l = 'resize width +50'
+  enter = 'mode main'
+  esc = 'mode main'
+
+[workspace-to-monitor-force-assignment]
+  # Terminal
+  1 = 'secondary'
+  # Firefox
+  2 = 'secondary'
+  # Teams
+  3 = 'main'
+  # Outlook
+  4 = 'main'
+  # Linear / Obsidian
+  5 = 'secondary'
+
+
+[gaps.inner]
+  horizontal = 10
+  vertical = 10
+
+[gaps.outer]
+  top = [{ monitor."Built-in Retina Display" = 15 }, 45]
+  left = 5
+  bottom = 5
+  right = 5
