@@ -1,6 +1,8 @@
 if OS.mac?
-  tap "koekeishiya/formulae"
+  tap "asmvik/formulae", trusted: true
+  tap "supersonic-app/supersonic", trusted: true
 
+  cask "supersonic"
   brew "trash"
 
   # Tiling WM - Yabai
@@ -11,14 +13,14 @@ if OS.mac?
   cask "scroll-reverser"
 
   cask "font-jetbrains-mono"
-  cask "font-symbols-only-nerd-font"
+  cask "font-hack-nerd-font"
   cask "bitwarden"
   brew "coreutils"
   cask "nextcloud"
   brew "nmap"
   brew "cava"
   brew "gnupg"
-  cask "docker"
+  cask "docker-desktop"
   cask "wezterm"
   brew "fish"
   brew "git"
@@ -34,13 +36,14 @@ brew "bat"
 brew "htop"
 brew "jq"
 brew "yq"
-brew "neofetch"
+brew "fastfetch"
 brew "lazygit"
 brew "eza"
 brew "zoxide"
 brew "watch"
 brew "ast-grep"
 brew "cloc"
+brew "just"
 
 # Languages and lang specific tooling
 brew "fnm"
@@ -57,3 +60,5 @@ brew "neovim" #, args: ["HEAD"]
 brew "tmux"
 brew "smug"
 brew "tpm"
+brew "tree-sitter"
+brew "tree-sitter-cli"
