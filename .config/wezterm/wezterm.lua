@@ -42,7 +42,7 @@ config.leader = { key = "Space", mods = "CTRL" }
 config.keys = {
 	{
 		key = "|",
-		mods = "LEADER|SHIFT",
+		mods = "LEADER",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
@@ -85,6 +85,8 @@ config.color_scheme = "Everforest Dark (Medium)"
 config.enable_scroll_bar = true
 config.native_macos_fullscreen_mode = true
 config.term = "wezterm"
+config.window_background_opacity = 0.85
+config.window_decorations = "RESIZE"
 
 -- Spawn a fish shell in login mode
 -- config.default_prog = { "/usr/bin/env", "fish" }
