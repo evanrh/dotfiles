@@ -1,4 +1,6 @@
-# vim: set ft=bash
+# vim: set ft=sh:
+# example setup and explanation of config: https://www.josean.com/posts/sketchybar-setup
+# docs: https://felixkratz.github.io/SketchyBar/
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
@@ -6,18 +8,33 @@ source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 default=(
   padding_left=5
   padding_right=5
-  icon.font="Hack Nerd Font:Bold:15.0"
+  icon.font="Hack Nerd Font:Bold:17.0"
   label.font="SF Pro:Semibold:15.0"
   #icon.color=0xffffffff
-  icon.color=$WHITE
+  icon.color=$GREEN
   #label.color=0xffffffff
-  label.color=$WHITE
+  label.color=$GREY
   icon.padding_left=5
-  icon.padding_right=5
-  label.padding_left=5
-  label.padding_right=5
+  icon.padding_right=2
+  label.padding_left=2
+  label.padding_right=10
+  background.color=$ITEM_BG_COLOR
   updates=on
 )
+
+bar_config=(
+  margin=10
+  padding_left=2
+  padding_right=2
+  color="$BAR_COLOR"
+  corner_radius=20
+  position=top
+  blur_radius=100
+  height=35
+  y_offset=5
+)
+
+sketchybar --bar "${bar_config[@]}"
 sketchybar --default "${default[@]}"
 sketchybar --add event aerospace_workspace_change
 
@@ -34,11 +51,25 @@ for sid in $(aerospace list-workspaces --all); do
       script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
-sketchybar --set space.1 label="1" icon=
-sketchybar --set space.2 label="2" icon=󰈹
-sketchybar --set space.3 label="3" icon=󰊻
-sketchybar --set space.4 label="4" icon=󰴢
-sketchybar --set space.5 label="5" icon=
+front_app_params=(
+  background.color="$ACCENT_COLOR"
+  background.corner_radius=5
+  background.height=25
+  label.color="$BAR_COLOR"
+  label.padding_left=5
+  label.padding_right=5
+  icon.drawing=off
+  script="$PLUGIN_DIR/front_app.sh"
+)
+sketchybar --add item front_app q \
+  --set front_app "${front_app_params[@]}" \
+  --subscribe front_app front_app_switched
+
+sketchybar --set space.1 label="1" icon= icon.color="$GREEN"
+sketchybar --set space.2 label="2" icon=󰈹 icon.color="$ORANGE"
+sketchybar --set space.3 label="3" icon=󰊻 icon.color="$BLUE"
+sketchybar --set space.4 label="4" icon=󰴢 icon.color="$BLUE"
+sketchybar --set space.5 label="5" icon= icon.color="$PURPLE"
 
 sketchybar --add item clock right \
   --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
@@ -48,10 +79,8 @@ sketchybar --add item clock right \
   --add item battery right \
   --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
   --subscribe battery system_woke power_source_change \
-  --add item swap e \
-  icon="" \
-  label.font="Symbols Nerd Font" \
-  icon.color=0x44FFFFFF \
-  label.color=0x44FFFFFF
+  --add item now-playing right \
+  --set now-playing update_freq=5 script="$PLUGIN_DIR/nowplaying.sh"
+
 
 sketchybar --update

@@ -17,7 +17,10 @@ start-at-login = true
 # Run Sketchybar together with AeroSpace
 # sketchybar has a built-in detection of already running process,
 # so it won't be run twice on AeroSpace restart
-after-startup-command = ['exec-and-forget sketchybar']
+after-startup-command = [
+  'exec-and-forget sketchybar',
+  'layout --workspace 2 --root h_accordion',
+]
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -26,6 +29,7 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 
  # Mouse lazily follows focused monitor (default in i3)
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+focus-follows-mouse.enabled = true
 
 on-window-detected = [
   {
@@ -35,6 +39,10 @@ on-window-detected = [
   {
     if = 'test %{app-bundle-id} = org.mozilla.firefox',
     run = 'move-node-to-workspace 2'
+  },
+  {
+    if = 'test %{app-bundle-id} = io.github.supersonic-app.supersonic',
+    run = 'move-node-to-workspace 5'
   },
   {
     if = 'test %{app-bundle-id} = com.microsoft.teams2',
@@ -67,6 +75,11 @@ on-window-detected = [
   alt-shift-j = 'move down'
   alt-shift-k = 'move up'
   alt-shift-l = 'move right'
+
+  ctrl-alt-h = 'join-with left'
+  ctrl-alt-j = 'join-with down'
+  ctrl-alt-k = 'join-with up'
+  ctrl-alt-l = 'join-with right'
 
   # Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
   alt-minus = 'split horizontal'
@@ -125,7 +138,7 @@ on-window-detected = [
 [workspace-to-monitor-force-assignment]
   # Terminal
   1 = 'secondary'
-  # Firefox
+  # Firefox / Music
   2 = 'secondary'
   # Teams
   3 = 'main'
