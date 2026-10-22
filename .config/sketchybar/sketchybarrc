@@ -5,6 +5,8 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 
+BRACKET_HEIGHT=32
+
 default=(
   padding_left=5
   padding_right=5
@@ -23,10 +25,10 @@ default=(
 )
 
 bar_config=(
-  margin=10
-  padding_left=2
-  padding_right=2
-  color="$BAR_COLOR"
+  margin=5
+  padding_left=0
+  padding_right=0
+  color=0x00000000
   corner_radius=20
   position=top
   blur_radius=100
@@ -52,10 +54,10 @@ for sid in $(aerospace list-workspaces --all); do
 done
 
 front_app_params=(
-  background.color="$ACCENT_COLOR"
-  background.corner_radius=5
-  background.height=25
-  label.color="$BAR_COLOR"
+  background.color="$BAR_COLOR"
+  background.corner_radius=12
+  background.height="$BRACKET_HEIGHT"
+  label.color="$ACCENT_COLOR"
   label.padding_left=5
   label.padding_right=5
   icon.drawing=off
@@ -71,16 +73,24 @@ sketchybar --set space.3 label="3" icon=󰊻 icon.color="$BLUE"
 sketchybar --set space.4 label="4" icon=󰴢 icon.color="$BLUE"
 sketchybar --set space.5 label="5" icon= icon.color="$PURPLE"
 
+bg_options=(
+  background.color="$BAR_COLOR"
+  background.corner_radius=12
+  background.height="$BRACKET_HEIGHT"
+)
 sketchybar --add item clock right \
-  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" "${bg_options[@]}" \
   --add item volume right \
-  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --set volume script="$PLUGIN_DIR/volume.sh" "${bg_options[@]}" \
   --subscribe volume volume_change \
   --add item battery right \
-  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" "${bg_options[@]}" \
   --subscribe battery system_woke power_source_change \
   --add item now-playing right \
-  --set now-playing update_freq=5 script="$PLUGIN_DIR/nowplaying.sh"
+  --set now-playing update_freq=5 script="$PLUGIN_DIR/nowplaying.sh" "${bg_options[@]}"
 
+# Spaces bracket
+sketchybar --add bracket spaces '/space\..*/' \
+  --set spaces "${bg_options[@]}"
 
 sketchybar --update
