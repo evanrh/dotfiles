@@ -72,6 +72,7 @@ sketchybar --set space.2 label="2" icon=󰈹 icon.color="$ORANGE"
 sketchybar --set space.3 label="3" icon=󰊻 icon.color="$BLUE"
 sketchybar --set space.4 label="4" icon=󰴢 icon.color="$BLUE"
 sketchybar --set space.5 label="5" icon= icon.color="$PURPLE"
+sketchybar --set space.6 label="6" icon= icon.color="$AQUA"
 
 bg_options=(
   background.color="$BAR_COLOR"

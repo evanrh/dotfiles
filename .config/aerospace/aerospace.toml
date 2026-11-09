@@ -3,7 +3,7 @@
 config-version = 2
 
 # In i3, all workspaces are phantom
-persistent-workspaces = ['1', '2', '3', '4', '5']
+persistent-workspaces = ['1', '2', '3', '4', '5', '6']
 
 # i3 doesn't have "normalizations" feature that why we disable them here.
 # But the feature is very helpful.
@@ -24,6 +24,7 @@ after-startup-command = [
   'layout --workspace 3 --root h_tiles',
   'layout --workspace 4 --root h_tiles',
   'layout --workspace 5 --root h_tiles',
+  'layout --workspace 6 --root h_tiles',
 ]
 
 # Notify Sketchybar about workspace change
@@ -63,6 +64,10 @@ on-window-detected = [
   {
     if = 'test %{app-bundle-id} = md.obsidian',
     run = 'move-node-to-workspace 5'
+  },
+  {
+    if = 'test %{app-bundle-id} = ai.aneesiqbal.rdpeek',
+    run = 'move-node-to-workspace 6'
   },
 ]
 [mode.main.binding]
@@ -142,14 +147,16 @@ on-window-detected = [
 [workspace-to-monitor-force-assignment]
   # Terminal
   1 = 'secondary'
-  # Firefox / Music
+  # Firefox
   2 = 'secondary'
   # Teams
   3 = 'main'
   # Outlook
   4 = 'main'
-  # Linear / Obsidian
+  # Linear, Obsidian, and music
   5 = 'secondary'
+  # Remote Desktop
+  6 = 'secondary'
 
 
 [gaps.inner]
